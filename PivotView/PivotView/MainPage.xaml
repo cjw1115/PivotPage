@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:PivotView"
+             x:Class="PivotView.FlowLayoutPage">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <StackLayout Grid.Row="0">
+            <Button Text="添加" Clicked="Add_Clicked"></Button>
+
+            <Button Text="减少" Clicked="Del_Clicked"></Button>
+        </StackLayout>
+        <ScrollView Orientation="Vertical" Grid.Row="1">
+            <ScrollView.Content>
+                <local:FlowLayout x:Name="flowLayout" ItemsSource="{Binding Items,Mode=OneWay}"
+            Column="2" ColumnSpacing="4" RowSpacing="1" 
+            HorizontalOptions="Fill" >
+                    <local:FlowLayout.ItemTemplate>
+                        <DataTemplate>
+                            <Image Source="{Binding ImageUri}" Aspect="AspectFit"></Image>
+                        </DataTemplate>
+                    </local:FlowLayout.ItemTemplate>
+                </local:FlowLayout>
+            </ScrollView.Content>
+        </ScrollView>
+        
+    </Grid>
+</ContentPage>

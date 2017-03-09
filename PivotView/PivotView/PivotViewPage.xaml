@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PivotView.PivotViewPage" 
+             xmlns:xf="clr-namespace:Xamarin.Forms;assembly=Xamarin.Forms.CarouselView"
+             xmlns:local="clr-namespace:PivotView">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <DataTemplate x:Key="NormalDataTemplate">
+                <ViewCell>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="30"/>
+                            <RowDefinition Height="auto"/>
+                        </Grid.RowDefinitions>
+                        <Label Grid.Row="0" Text="{Binding Title}"  VerticalOptions="Center"></Label>
+                        <BoxView Grid.Row="1" HeightRequest="2" BackgroundColor="Gray"></BoxView>
+                    </Grid>
+                </ViewCell>
+            </DataTemplate>
+            <DataTemplate x:Key="SelectedDataTemplate">
+                <ViewCell>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="30"/>
+                            <RowDefinition Height="auto"/>
+                        </Grid.RowDefinitions>
+                        <Label Grid.Row="0" Text="{Binding Title}"  VerticalOptions="Center"></Label>
+                        <BoxView Grid.Row="1" HeightRequest="2" BackgroundColor="Red"></BoxView>
+                    </Grid>
+                </ViewCell>
+            </DataTemplate>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Button Text="增加" Grid.Row="0" Clicked="Button_Clicked"></Button>
+        <local:ItemsControl Grid.Row="1"
+            ItemsSource="{Binding Items,Mode=OneWay}"  Orientation="Horizontal"
+                                    SelectedItemTemplate="{StaticResource SelectedDataTemplate}"
+                                    ItemTemplate="{StaticResource NormalDataTemplate}"
+                            ItemSelected="ItemsControl_ItemSelected">
+        </local:ItemsControl>
+        <xf:CarouselView></xf:CarouselView>
+    </Grid>
+</ContentPage>
