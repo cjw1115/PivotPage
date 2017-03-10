@@ -168,6 +168,31 @@ namespace PivotView
             get { return (object)this.GetValue(SelectedItemProperty); }
             set { SetValue(SelectedItemProperty, value); }
         }
+
+        public static readonly BindableProperty SelectedIndexProperty = BindableProperty.Create("SelectedIndex", typeof(int), typeof(ItemsControl), 0, propertyChanged: OnSelectedIndexChanged);
+        public int SelectedIndex
+        {
+            get { return (int)this.GetValue(SelectedIndexProperty); }
+            set { SetValue(SelectedIndexProperty, value); }
+        }
+        static void OnSelectedIndexChanged(BindableObject bindable, object oldValue, object newValue)
+        {
+            var list = (ItemsControl)bindable;
+            var newIndex = (int)newValue;
+            var oldIndex = (int)oldValue;
+            if (newIndex == oldIndex)
+            {
+                return;
+            }
+            if (((list.SelectedItem)) == list.itemsPanel.Children[newIndex].BindingContext)
+            {
+                return;
+            }
+            else
+            {
+                list.SelectedItem = list.itemsPanel.Children[newIndex].BindingContext;
+            }
+        }
         private void OnTapped(object sender, EventArgs e)
         {
             var view = (BindableObject)sender;
@@ -180,10 +205,6 @@ namespace PivotView
         static void OnSelectedItemChanged(BindableObject bindable, object oldValue, object newValue)
         {
             var list = (ItemsControl)bindable;
-            if (list.ItemSelected != null)
-            {
-                list.ItemSelected(list, new SelectedItemChangedEventArgs(newValue));
-            }
 
             if (list._lastSelectedView != null)
             {
@@ -192,6 +213,7 @@ namespace PivotView
                     if (list.ItemsPanel.Children[i].BindingContext == list._lastSelectedView.BindingContext)
                     {
                         list.ItemsPanel.Children[i] = list._lastSelectedView;
+                        break;
                     }
                 }
             }
@@ -215,9 +237,17 @@ namespace PivotView
                 {
                     list._lastSelectedView = list.ItemsPanel.Children[i];
                     list.ItemsPanel.Children[i] = view;
+                    list.SelectedIndex = i;
+                    break;
                 }
             }
+
             
+            if (list.ItemSelected != null)
+            {
+                list.ItemSelected(list, new SelectedItemChangedEventArgs(newValue));
+            }
+
         }
     }
 }

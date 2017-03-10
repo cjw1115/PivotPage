@@ -8,9 +8,9 @@ using Xamarin.Forms;
 
 namespace PivotView
 {
-    public partial class NormalDataTemplate : ViewCell
+    public partial class MokeyView : DataTemplate
     {
-        public NormalDataTemplate()
+        public MokeyView()
         {
             InitializeComponent();
         }

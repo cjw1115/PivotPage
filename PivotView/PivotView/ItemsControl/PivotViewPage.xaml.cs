@@ -18,8 +18,8 @@ namespace PivotView
             InitializeComponent();
             this.BindingContext = VM;
             VM.LoadData();
-            Label label = new Label();
-        }
+
+        } 
 
         Random rand = new Random();
         private void Button_Clicked(object sender, EventArgs e)
@@ -35,7 +35,29 @@ namespace PivotView
 
         private void ItemsControl_ItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
+            if (carouselView.Position == itemsControl.SelectedIndex)
+            {
+                return;
+            }
+            else
+            {
+                carouselView.Position = itemsControl.SelectedIndex;
+            }
             System.Diagnostics.Debug.WriteLine($"Selected:{e.SelectedItem.ToString()}");
         }
+
+        private void CarouselView_PositionSelected(object sender, SelectedPositionChangedEventArgs e)
+        {
+            if(itemsControl.SelectedIndex == (int)e.SelectedPosition)
+            {
+                return;
+            }
+            else
+            {
+                itemsControl.SelectedIndex = (int)e.SelectedPosition;
+            }
+        }
+        
+
     }
 }
