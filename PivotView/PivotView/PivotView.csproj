@@ -38,21 +38,26 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="DemoTabbedPage.xaml.cs">
+      <DependentUpon>DemoTabbedPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="DemoTabbedPageTab1.xaml.cs">
+      <DependentUpon>DemoTabbedPageTab1.xaml</DependentUpon>
+    </Compile>
     <Compile Include="FlowLayout\FlowLayout.cs" />
     <Compile Include="ItemsControl\ItemsControl.cs" />
     <Compile Include="FlowLayout\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ItemsControl\PivotViewPage.xaml.cs">
-      <DependentUpon>PivotViewPage.xaml</DependentUpon>
+    <Compile Include="MokeyView.xaml.cs">
+      <DependentUpon>MokeyView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MokeyPage.xaml.cs">
-      <DependentUpon>MokeyPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pivot\Pivot.cs" />
+    <Compile Include="PivotPage.cs" />
+    <Compile Include="PivotViewMdoel.cs" />
+    <Compile Include="Pivot\ItemsPanel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TextPage.xaml.cs">
-      <DependentUpon>TextPage.xaml</DependentUpon>
+    <Compile Include="Pivot.xaml.cs">
+      <DependentUpon>Pivot.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -89,19 +94,25 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="TextPage.xaml">
+    <EmbeddedResource Include="Pivot.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="ItemsControl\PivotViewPage.xaml">
+    <EmbeddedResource Include="DemoTabbedPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="MokeyPage.xaml">
+    <EmbeddedResource Include="DemoTabbedPageTab1.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="MokeyView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>

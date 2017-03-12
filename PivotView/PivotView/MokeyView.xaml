@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PivotView.MokeyView">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <ListView  Grid.Row="1" ItemsSource="{Binding Items,Mode=OneWay}" HasUnevenRows="False" SeparatorVisibility="None">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ImageCell ImageSource="{Binding ImageUri}" Text="{Binding Name}"></ImageCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <ActivityIndicator  IsRunning="{Binding IsLoading,Mode=OneWay}"></ActivityIndicator>
+    </Grid>
+</ContentView>

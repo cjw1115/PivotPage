@@ -249,5 +249,9 @@ namespace PivotView
             }
 
         }
+        public int Count
+        {
+            get { return this.ItemsPanel.Children.Count; }
+        }
     }
 }

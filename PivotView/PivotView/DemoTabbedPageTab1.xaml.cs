@@ -5,12 +5,14 @@ using System.Text;
 using System.Threading.Tasks;
 
 using Xamarin.Forms;
+using Xamarin.Forms.Xaml;
 
 namespace PivotView
 {
-    public partial class MokeyView : DataTemplate
+    [XamlCompilation(XamlCompilationOptions.Compile)]
+    public partial class DemoTabbedPageTab1 : ContentPage
     {
-        public MokeyView()
+        public DemoTabbedPageTab1()
         {
             InitializeComponent();
         }

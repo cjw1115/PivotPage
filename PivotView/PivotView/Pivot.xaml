@@ -1,10 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="PivotView.PivotViewPage" 
+             xmlns:local="clr-namespace:PivotView"
              xmlns:xf="clr-namespace:Xamarin.Forms;assembly=Xamarin.Forms.CarouselView"
-             xmlns:local="clr-namespace:PivotView">
-    <ContentPage.Resources>
+             x:Class="PivotView.Pivot"
+             Title="Mokey">
+    <!--<ContentPage.Resources>
         <ResourceDictionary>
             <DataTemplate x:Key="NormalDataTemplate">
                 <ViewCell>
@@ -31,27 +32,17 @@
                 </ViewCell>
             </DataTemplate>
         </ResourceDictionary>
-    </ContentPage.Resources>
+    </ContentPage.Resources>-->
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Button Text="增加" Grid.Row="0" Clicked="Button_Clicked"></Button>
-        <local:ItemsControl x:Name="itemsControl" Grid.Row="1"
-            ItemsSource="{Binding Items,Mode=OneWay}"  Orientation="Horizontal"
-                                    SelectedItemTemplate="{StaticResource SelectedDataTemplate}"
-                                    ItemTemplate="{StaticResource NormalDataTemplate}"
-                            ItemSelected="ItemsControl_ItemSelected">
-        </local:ItemsControl>
-        <xf:CarouselView x:Name="carouselView" PositionSelected="CarouselView_PositionSelected"
-            ItemsSource="{Binding Items,Mode=OneWay}"  Grid.Row="2">
-            <xf:CarouselView.ItemTemplate>
-                <DataTemplate>
-                    <Image Source="{Binding ImageUri}"></Image>
-                </DataTemplate>
-            </xf:CarouselView.ItemTemplate>
-        </xf:CarouselView>
+        <local:ItemsControl x:Name="headerList" Grid.Row="0" 
+                            ItemSelected="headerList_ItemSelected"
+                            ></local:ItemsControl>
+        <ScrollView x:Name="scrollView" Orientation="Horizontal" Grid.Row="1">
+            <local:HorizentalLayout x:Name="viewPannel"  ></local:HorizentalLayout>
+        </ScrollView>
     </Grid>
 </ContentPage>
