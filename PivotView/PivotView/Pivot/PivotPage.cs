@@ -96,7 +96,7 @@ namespace PivotView
             set { _headerList.ItemTemplate = value; }
         }
 
-        public static readonly BindableProperty HeadersProperty = BindableProperty.Create("Headers", typeof(IEnumerable), typeof(Pivot), null, propertyChanged: OnHeadersPropertyChnaged);
+        public static readonly BindableProperty HeadersProperty = BindableProperty.Create("Headers", typeof(IEnumerable), typeof(PivotPage), null, propertyChanged: OnHeadersPropertyChnaged);
         public IEnumerable Headers
         {
             get { return (IEnumerable)this.GetValue(HeadersProperty); }
@@ -113,7 +113,7 @@ namespace PivotView
             pivot._headerList.ItemsSource = (IEnumerable)newValue;
         }
 
-        public static readonly BindableProperty ViewsProperty = BindableProperty.Create("Views", typeof(IEnumerable), typeof(Pivot), null, propertyChanged: OnViewsPropertyChnaged);
+        public static readonly BindableProperty ViewsProperty = BindableProperty.Create("Views", typeof(IEnumerable), typeof(PivotPage), null, propertyChanged: OnViewsPropertyChnaged);
         public IEnumerable Views
         {
             get { return (IEnumerable)this.GetValue(ViewsProperty); }

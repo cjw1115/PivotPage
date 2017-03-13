@@ -13,7 +13,7 @@ namespace PivotView
         {
             InitializeComponent();
 
-            MainPage = new PivotView.DemoTabbedPage();
+            MainPage = new PivotView.FlowLayoutPage();
         }
 
         protected override void OnStart()

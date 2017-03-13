@@ -13,7 +13,7 @@ using Xamarin.Forms.Xaml;
 namespace PivotView
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class FlowLayoutPage : ContentView
+    public partial class FlowLayoutPage : ContentPage
     {
         MainPageViewModel VM = new MainPageViewModel();
         public FlowLayoutPage()

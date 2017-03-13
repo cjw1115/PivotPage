@@ -46,20 +46,17 @@
     </Compile>
     <Compile Include="FlowLayout\FlowLayout.cs" />
     <Compile Include="ItemsControl\ItemsControl.cs" />
-    <Compile Include="FlowLayout\MainPage.xaml.cs">
-      <DependentUpon>MainPage.xaml</DependentUpon>
+    <Compile Include="FlowLayout\FlowLayoutPage.xaml.cs">
+      <DependentUpon>FlowLayoutPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="MokeyView.xaml.cs">
       <DependentUpon>MokeyView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="PivotPage.cs" />
-    <Compile Include="PivotViewMdoel.cs" />
-    <Compile Include="Pivot\ItemsPanel.cs" />
+    <Compile Include="Pivot\PivotPage.cs" />
+    <Compile Include="Pivot\PivotViewMdoel.cs" />
+    <Compile Include="Pivot\HorizentalLayout.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Pivot.xaml.cs">
-      <DependentUpon>Pivot.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="ScrollViewExpand.cs" />
+    <Compile Include="Pivot\ScrollViewExpand.cs" />
     <Compile Include="TestView.xaml.cs">
       <DependentUpon>TestView.xaml</DependentUpon>
     </Compile>
@@ -98,13 +95,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="FlowLayout\MainPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Pivot.xaml">
+    <EmbeddedResource Include="FlowLayout\FlowLayoutPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>
