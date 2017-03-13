@@ -13,7 +13,7 @@ namespace PivotView
     {
         private Grid _grid;
         private ItemsControl _headerList;
-        private ScrollView _scrollView;
+        private ScrollViewExpand _scrollView;
         private HorizentalLayout _viewPannel;
         
         void InitLayout()
@@ -25,7 +25,7 @@ namespace PivotView
             _headerList = new ItemsControl();
             _headerList.SetValue(Grid.RowProperty, 0);
 
-            _scrollView = new ScrollView();
+            _scrollView = new ScrollViewExpand();
             _scrollView.Orientation = ScrollOrientation.Horizontal;
             _scrollView.SetValue(Grid.RowProperty, 1);
 
@@ -42,18 +42,47 @@ namespace PivotView
             InitLayout();
 
             _headerList.ItemSelected += headerList_ItemSelected;
+            _scrollView.BeginScroll += _scrollView_BeginScroll;
+            _scrollView.EndScroll += _scrollView_EndScroll;
         }
-        private void headerList_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+
+        private void _scrollView_EndScroll(object sender, EventArgs e)
         {
-            //var perWidth=scrollView.ContentSize.Width / headerList.Count;
-            //scrollView.ScrollToAsync(headerList.SelectedIndex* perWidth, scrollView.ScrollY, true);
-            ScrollTo(_headerList.SelectedIndex);
+            var index = (int)(_scrollView.ScrollX / _scrollView.Width);
+            if(_scrollView.Width/2<(_scrollView.ScrollX % _scrollView.Width))
+            {
+                index++;
+            }
+            //ScrollTo(index, true);
+            _headerList.SelectedIndex = index;
+        }
+
+        private bool isScrolled = false;
+        private void _scrollView_BeginScroll(object sender, EventArgs e)
+        {
+            isScrolled = true;
 
         }
-        public void ScrollTo(int index)
+
+        private void headerList_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+        {
+            if (isScrolled == false)
+            {
+                ScrollTo(_headerList.SelectedIndex, false);
+            }
+            else
+            {
+                isScrolled = false;
+            }
+            //var perWidth=scrollView.ContentSize.Width / headerList.Count;
+            //scrollView.ScrollToAsync(headerList.SelectedIndex* perWidth, scrollView.ScrollY, true);
+            
+
+        }
+        public void ScrollTo(int index,bool animation)
         {
             var perWidth = _scrollView.Width;
-            _scrollView.ScrollToAsync(index * perWidth, _scrollView.ScrollY, false);
+            _scrollView.ScrollToAsync(index * perWidth, _scrollView.ScrollY, animation);
         }
 
         public DataTemplate SelectedDataTemplate

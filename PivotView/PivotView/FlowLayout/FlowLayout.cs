@@ -52,11 +52,9 @@ namespace PivotView
                 col++;
             }
         }
-
         private double _maxHeight;
         protected override SizeRequest OnMeasure(double widthConstraint, double heightConstraint)
-        {
-            
+        {   
             int col = 0;
             double[] colHeights = new double[Column];
             double allColumnSpacing = ColumnSpacing * (Column - 1);
@@ -156,7 +154,5 @@ namespace PivotView
             this.UpdateChildrenLayout();
             this.InvalidateLayout();
         }
-
-
     }
 }

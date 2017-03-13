@@ -53,6 +53,19 @@ namespace PivotView
         {
             Headers.Add(new PivotItemModel { Title = "Mokey" });
             Views.Add(new MokeyView());
+
+
+            Headers.Add(new PivotItemModel { Title = "Test" });
+            Views.Add(new TestView());
+
+            Headers.Add(new PivotItemModel { Title = "Test2" });
+            Views.Add(new TestView2());
+
+            Headers.Add(new PivotItemModel { Title = "Test3" });
+            Views.Add(new TestVIew3());
+
+            //Headers.Add(new PivotItemModel { Title = "MokeyFLow" });
+            //Views.Add(new FlowLayoutPage());
         }
     }
 }
