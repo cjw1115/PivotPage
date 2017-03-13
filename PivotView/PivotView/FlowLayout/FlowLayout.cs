@@ -35,38 +35,45 @@ namespace PivotView
         }
         protected override void LayoutChildren(double x, double y, double width, double height)
         {
-            int col = 0;
+            
             double[] colHeights = new double[Column];
             double allColumnSpacing = ColumnSpacing * (Column - 1);
             columnWidth = (width- allColumnSpacing )/ Column;
             foreach (var item in this.Children)
             {
                 var measuredSize=item.Measure(columnWidth, height, MeasureFlags.IncludeMargins);
-                if (col >= Column)
-                    col = 0;
-
+                int col = 0;
+                for (int i = 1; i < Column; i++)
+                {
+                    if (colHeights[i] < colHeights[col])
+                    {
+                        col = i;
+                    }
+                }
                 item.Layout(new Rectangle(col * (columnWidth + ColumnSpacing), colHeights[col], columnWidth, measuredSize.Request.Height));
 
 
                 colHeights[col] += measuredSize.Request.Height+RowSpacing;
-                col++;
             }
         }
         private double _maxHeight;
         protected override SizeRequest OnMeasure(double widthConstraint, double heightConstraint)
         {   
-            int col = 0;
             double[] colHeights = new double[Column];
             double allColumnSpacing = ColumnSpacing * (Column - 1);
             columnWidth = (widthConstraint - allColumnSpacing) / Column;
             foreach (var item in this.Children)
             {
                 var measuredSize = item.Measure(columnWidth, heightConstraint, MeasureFlags.IncludeMargins);
-                if (col >= Column)
-                    col = 0;
-
+                int col = 0;
+                for (int i = 1; i < Column; i++)
+                {
+                    if (colHeights[i] < colHeights[col])
+                    {
+                        col = i;
+                    }
+                }
                 colHeights[col] += measuredSize.Request.Height + RowSpacing;
-                col++;
             }
             _maxHeight = colHeights.OrderByDescending(m => m).First();
             return new SizeRequest(new Size(widthConstraint, _maxHeight));

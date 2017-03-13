@@ -22,6 +22,19 @@ namespace PivotView
             this.BindingContext = this.VM;
             this.VM.LoadData();
         }
+
+        
+        Random rand = new Random();
+        private void Button_Clicked(object sender, EventArgs e)
+        {
+            var index = rand.Next(1, 6);
+            MokeyModel item = new MokeyModel()
+            {
+                ImageUri = $"pic{index}.png",
+                Name=$"猴子{index}"
+            };
+            VM.Items.Add(item);
+        }
     }
     public class MokeyModel
     {
@@ -37,8 +50,8 @@ namespace PivotView
         }
 
 
-        public ObservableCollection<ItemModel> _items;
-        public ObservableCollection<ItemModel> Items
+        public ObservableCollection<MokeyModel> _items;
+        public ObservableCollection<MokeyModel> Items
         {
             get { return _items; }
             set
@@ -51,12 +64,12 @@ namespace PivotView
         {
             IsLoading = true;
             await Task.Delay(3000);
-            Items = new ObservableCollection<ItemModel>
+            Items = new ObservableCollection<MokeyModel>
                 {
-                    new ItemModel{ ImageUri="pic1.png" ,Title="猴子1"},
-                    new ItemModel{ ImageUri="pic2.png" ,Title="猴子2"},
+                    new MokeyModel{ ImageUri="pic1.png" ,Name="猴子1"},
+                    new MokeyModel{ ImageUri="pic2.png" ,Name="猴子2"},
 
-                    new ItemModel{ ImageUri="pic3.png" ,Title="猴子3"}
+                    new MokeyModel{ ImageUri="pic3.png" ,Name="猴子3"}
                 };
             IsLoading = false;
         }

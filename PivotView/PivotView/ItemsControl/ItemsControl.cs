@@ -75,12 +75,10 @@ namespace PivotView
 
             control.ItemsPanel.Children.Clear();
 
-
-
-
             foreach (var item in (IEnumerable)newValue)
             {
-                var content = control.ItemTemplate.CreateContent();
+                object content;
+                content = control.ItemTemplate.CreateContent();
                 View view;
                 var cell = content as ViewCell;
                 if (cell != null)
@@ -102,7 +100,7 @@ namespace PivotView
             {
                 newCollection.CollectionChanged += control.OnCollectionChanged;
             }
-
+            control.SelectedItem = control.ItemsPanel.Children[control.SelectedIndex].BindingContext;
             control.UpdateChildrenLayout();
             control.InvalidateLayout();
         }

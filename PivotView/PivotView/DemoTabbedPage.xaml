@@ -6,11 +6,7 @@
              xmlns:pages="clr-namespace:PivotView;assembly=PivotView"
              Title="TabbedPage">
     <TabbedPage.Padding>
-        <OnPlatform x:TypeArguments="Thickness">
-            <OnPlatform.iOS>
-                0, 40, 0, 0
-            </OnPlatform.iOS>
-        </OnPlatform>
+        
     </TabbedPage.Padding>
     
   <!--Pages can be added as references or inline-->
@@ -19,6 +15,13 @@
                   Headers="{Binding Headers,Mode=OneWay}"
                   Views="{Binding Views,Mode=OneWay}"
                  >
+        <pages:PivotPage.Padding>
+            <OnPlatform x:TypeArguments="Thickness">
+                <OnPlatform.iOS>
+                    0, 20, 0, 0
+                </OnPlatform.iOS>
+            </OnPlatform>
+        </pages:PivotPage.Padding>
         <pages:PivotPage.NornamlDataTemplate>
             <DataTemplate>
                 <ViewCell>
