@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using Xamarin.Forms;
+using System.Linq;
+
 namespace PivotView
 {
     public class ItemsControl : ContentView
@@ -22,8 +24,8 @@ namespace PivotView
             _tapGestureRecognizer.Tapped += OnTapped;
         }
 
-        private Layout<View> itemsPanel = null;
-        public Layout<View> ItemsPanel
+        private StackLayout itemsPanel = null;
+        public StackLayout ItemsPanel
         {
             get { return this.itemsPanel; }
             set { this.itemsPanel = value; }
@@ -95,6 +97,8 @@ namespace PivotView
                 control.ItemsPanel.Children.Add(view);
             }
 
+            
+
             var newCollection = newValue as INotifyCollectionChanged;
             if (newCollection != null)
             {
@@ -103,6 +107,7 @@ namespace PivotView
             control.SelectedItem = control.ItemsPanel.Children[control.SelectedIndex].BindingContext;
             control.UpdateChildrenLayout();
             control.InvalidateLayout();
+            
         }
         private void OnCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
@@ -139,9 +144,11 @@ namespace PivotView
                 view.BindingContext = item;
                 this.ItemsPanel.Children.Insert(e.NewItems.IndexOf(item), view);
             }
+            
 
             this.UpdateChildrenLayout();
             this.InvalidateLayout();
+            
         }
         
         
@@ -250,6 +257,12 @@ namespace PivotView
         public int Count
         {
             get { return this.ItemsPanel.Children.Count; }
+        }
+
+        
+        public double RealWidth
+        {
+            get { return this.itemsPanel.Children.Sum(m => m.WidthRequest) + (this.itemsPanel.Children.Count - 1) * this.itemsPanel.Spacing;  }
         }
     }
 }

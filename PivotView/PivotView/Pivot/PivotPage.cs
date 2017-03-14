@@ -13,6 +13,7 @@ namespace PivotView
     {
         private Grid _grid;
         private ItemsControl _headerList;
+        private BoxView _block;
         private ScrollViewExpand _scrollView;
         private HorizentalLayout _viewPannel;
         
@@ -20,19 +21,30 @@ namespace PivotView
         {
             _grid = new Grid();
             _grid.RowDefinitions.Add(new RowDefinition() { Height = GridLength.Auto });
+            _grid.RowDefinitions.Add(new RowDefinition() { Height = GridLength.Auto });
             _grid.RowDefinitions.Add(new RowDefinition() { Height = GridLength.Star });
 
             _headerList = new ItemsControl();
             _headerList.SetValue(Grid.RowProperty, 0);
 
+            _block = new BoxView();
+            _block.HeightRequest = 2;
+            _block.WidthRequest = 50;
+            _block.HorizontalOptions = LayoutOptions.Start;
+            _block.VerticalOptions = LayoutOptions.Start;
+
+            _block.BackgroundColor = Color.Red;
+            _block.SetValue(Grid.RowProperty, 1);
+
             _scrollView = new ScrollViewExpand();
             _scrollView.Orientation = ScrollOrientation.Horizontal;
-            _scrollView.SetValue(Grid.RowProperty, 1);
+            _scrollView.SetValue(Grid.RowProperty, 2);
 
             _viewPannel = new HorizentalLayout();
             _scrollView.Content = _viewPannel;
 
             _grid.Children.Add(_headerList);
+            _grid.Children.Add(_block);
             _grid.Children.Add(_scrollView);
 
             this.Content = _grid;
@@ -44,6 +56,14 @@ namespace PivotView
             _headerList.ItemSelected += headerList_ItemSelected;
             _scrollView.BeginScroll += _scrollView_BeginScroll;
             _scrollView.EndScroll += _scrollView_EndScroll;
+            _scrollView.Scrolled += _scrollView_Scrolled;
+        }
+
+        
+        private void _scrollView_Scrolled(object sender, ScrolledEventArgs e)
+        {
+            var x=_scrollView.ScrollX * _headerList.RealWidth / _scrollView.ContentSize.Width;
+            _block.TranslateTo(x, _block.TranslationY);
         }
 
         private void _scrollView_EndScroll(object sender, EventArgs e)

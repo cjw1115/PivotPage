@@ -54,16 +54,26 @@
             <pages:PivotViewMdoel></pages:PivotViewMdoel>
         </pages:PivotPage.BindingContext>
     </pages:PivotPage>
-  <ContentPage Title="Tab 2">
-    <StackLayout>
-      <Label Text="Green"  HorizontalTextAlignment="Center" HorizontalOptions="FillAndExpand" Margin="5" />
-      <BoxView Color="Green" VerticalOptions="FillAndExpand" />
-    </StackLayout>
-  </ContentPage>
-  <ContentPage Title="Tab 3">
-    <StackLayout>
-      <Label Text="Blue" HorizontalTextAlignment="Center" HorizontalOptions="FillAndExpand" Margin="5"  />
-      <BoxView Color="Blue" VerticalOptions="FillAndExpand" />
-    </StackLayout>
-  </ContentPage>
+    <pages:FlowLayoutPage>
+        <pages:FlowLayoutPage.Padding>
+            <OnPlatform x:TypeArguments="Thickness">
+                <OnPlatform.iOS>
+                    0, 20, 0, 0
+                </OnPlatform.iOS>
+            </OnPlatform>
+        </pages:FlowLayoutPage.Padding>
+    </pages:FlowLayoutPage>
+    <ContentPage Title="Tab 2">
+        <ContentPage.Padding>
+            <OnPlatform x:TypeArguments="Thickness">
+                <OnPlatform.iOS>
+                    0, 20, 0, 0
+                </OnPlatform.iOS>
+            </OnPlatform>
+        </ContentPage.Padding>
+        <StackLayout>
+            <Label Text="Green"  HorizontalTextAlignment="Center" HorizontalOptions="FillAndExpand" Margin="5" />
+            <BoxView Color="Green" VerticalOptions="FillAndExpand" />
+        </StackLayout>
+    </ContentPage>
 </TabbedPage>
