@@ -2,7 +2,27 @@
 <ContentView xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="PivotView.TestView">
   <ContentView.Content>
         <Grid>
-            <BoxView BackgroundColor="Orange"></BoxView>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <Image Source="CQ.png" HorizontalOptions="Center" VerticalOptions="Center"></Image>
+            </Grid>
+            <TableView Grid.Row="1">
+                <TableRoot>
+                    <TableSection Title="Name">
+                        <TextCell Text="CQ"></TextCell>
+                    </TableSection>
+                    <TableSection Title="Age">
+                        <TextCell Text="18"></TextCell>
+                    </TableSection>
+                    <TableSection Title="Address">
+                        <TextCell Text="Chaoyang,Beijing" Detail="NO.100"></TextCell>
+                    </TableSection>
+                </TableRoot>
+            </TableView>
         </Grid>
+        
   </ContentView.Content>
 </ContentView>

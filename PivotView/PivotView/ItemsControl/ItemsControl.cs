@@ -9,19 +9,39 @@ namespace PivotView
 {
     public class ItemsControl : ContentView
     {
-        private ScrollView _scrollView;
+        private ScrollViewExpand _scrollView;
+        public event EventHandler<ScrolledEventArgs> PannelScrolled;
+        public event EventHandler PannelScrollStarted;
+        public event EventHandler PannelScrollStopped;
         public ItemsControl()
         {
-            this._scrollView = new ScrollView();
+            this._scrollView = new ScrollViewExpand();
             this._scrollView.Orientation = Orientation;
 
             this.itemsPanel = new StackLayout() { Orientation = StackOrientation.Horizontal };
 
             this.Content = this._scrollView;
             this._scrollView.Content = this.itemsPanel;
-
+            this._scrollView.BeginScroll += _scrollView_BeginScroll; ;
+            this._scrollView.EndScroll += _scrollView_EndScroll;
+            this._scrollView.Scrolled += _scrollView_Scrolled;
             _tapGestureRecognizer = new TapGestureRecognizer();
             _tapGestureRecognizer.Tapped += OnTapped;
+        }
+
+        private void _scrollView_Scrolled(object sender, ScrolledEventArgs e)
+        {
+            PannelScrolled?.Invoke(this, e);
+        }
+
+        private void _scrollView_EndScroll(object sender, EventArgs e)
+        {
+            PannelScrollStopped?.Invoke(this, null);
+        }
+
+        private void _scrollView_BeginScroll(object sender, EventArgs e)
+        {
+            PannelScrollStarted?.Invoke(this,null);
         }
 
         private StackLayout itemsPanel = null;
@@ -262,7 +282,15 @@ namespace PivotView
         
         public double RealWidth
         {
-            get { return this.itemsPanel.Children.Sum(m => m.WidthRequest) + (this.itemsPanel.Children.Count - 1) * this.itemsPanel.Spacing;  }
+            get { return this.itemsPanel.Children.Sum(m => m.Width) + (this.itemsPanel.Children.Count - 1) * this.itemsPanel.Spacing;  }
+        }
+        public double ScrollX
+        {
+            get { return _scrollView.ScrollX; }
+        }
+        public double ScrollY
+        {
+            get { return _scrollView.ScrollY; }
         }
     }
 }

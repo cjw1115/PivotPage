@@ -57,13 +57,37 @@ namespace PivotView
             _scrollView.BeginScroll += _scrollView_BeginScroll;
             _scrollView.EndScroll += _scrollView_EndScroll;
             _scrollView.Scrolled += _scrollView_Scrolled;
+
+            //_headerList.PannelScrollStarted += _headerList_PannelScrollStarted;
+            //_headerList.PannelScrollStopped += _headerList_PannelScrollStopped ;
+            //_headerList.PannelScrolled += _headerList_PannelScrolled;
         }
 
-        
+        //private double oldBlockScrollX;
+        //private void _headerList_PannelScrolled(object sender, ScrolledEventArgs e)
+        //{
+        //    _block.TranslateTo(oldBlockScrollX  - e.ScrollX, _block.TranslationY);
+         
+        //}
+
+        //private double oldPostion;
+        //private void _headerList_PannelScrollStopped(object sender, EventArgs e)
+        //{
+        //    throw new NotImplementedException();
+        //}
+
+        //private void _headerList_PannelScrollStarted(object sender, EventArgs e)
+        //{
+        //    throw new NotImplementedException();
+        //}
+
+       
+
         private void _scrollView_Scrolled(object sender, ScrolledEventArgs e)
         {
             var x=_scrollView.ScrollX * _headerList.RealWidth / _scrollView.ContentSize.Width;
-            _block.TranslateTo(x, _block.TranslationY);
+            _block.TranslateTo(x-_headerList.ScrollX, _block.TranslationY);
+            //oldBlockScrollX = _block.TranslationX;
         }
 
         private void _scrollView_EndScroll(object sender, EventArgs e)
