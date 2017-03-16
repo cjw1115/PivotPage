@@ -55,6 +55,9 @@
     <Compile Include="Pivot\PivotPage.cs" />
     <Compile Include="Pivot\PivotViewMdoel.cs" />
     <Compile Include="Pivot\HorizentalLayout.cs" />
+    <Compile Include="Pivot\PivotXamlPage.xaml.cs">
+      <DependentUpon>PivotXamlPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Pivot\ScrollViewExpand.cs" />
     <Compile Include="TestView.xaml.cs">
@@ -132,6 +135,12 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="TestVIew3.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Pivot\PivotXamlPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>

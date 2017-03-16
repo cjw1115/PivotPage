@@ -19,5 +19,10 @@ namespace PivotView
         {
             EndScroll?.Invoke(this, null);
         }
+        public ScrollViewExpand()
+        {
+            
+        }
+        
     }
 }

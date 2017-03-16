@@ -14,75 +14,88 @@ using Xamarin.Forms.Platform.Android;
 using PivotView;
 using PivotView.Droid;
 using static Android.Views.View;
+using Android.Support.V4.View;
+using Java.Lang;
+using System.Collections;
 
-[assembly:ExportRenderer(typeof(ScrollViewExpand),typeof(ScrollView_Android))]
+[assembly: ExportRenderer(typeof(HorizentalLayout), typeof(ScrollView_Android))]
 namespace PivotView.Droid
 {
-    public class ScrollView_Android:ScrollViewRenderer
+    public class ScrollView_Android:ViewRenderer<HorizentalLayout, ViewPager>
     {
-        protected override void OnElementChanged(VisualElementChangedEventArgs e)
+        public static int TouchEventId => -9983761;
+        private Handler handler;
+        protected override void OnElementChanged(ElementChangedEventArgs<HorizentalLayout> e)
         {
             base.OnElementChanged(e);
-            var scrollView = (ScrollViewExpand)this.Element;
-            this.SetOnTouchListener(new OnTouchListener(scrollView));
+            if (this.Control == null)
+            {
+                var viewpager = (this.Context as Activity).LayoutInflater.Inflate(Resource.Layout.CustomViewPager, null) as ViewPager;
+
+                viewpager.Adapter = new CustomPagerAdapter(this.Context, this.Element.Children);
+                SetNativeControl(viewpager);
+
+            }
         }
 
-        private void ScrollView_EndScroll(object sender, EventArgs e)
+        private void ScrollView_Android_Touch(object sender, TouchEventArgs e)
         {
-            
-        }
-    }
-    public class OnTouchListener : IOnTouchListener
-    {
-        private static int lastX = 0;
-        private static int touchEventId = -9983761;
+            e.Handled = true;
 
-        private Handler handler = new MyHandler();
-
-        public static ScrollViewExpand _scrollView;
-
-        public IntPtr Handle => throw new NotImplementedException();
-
-        public OnTouchListener(ScrollViewExpand scrollView)
-        {
-            _scrollView = scrollView;
-        }
-
-        public void Dispose()
-        {
-            
         }
 
         public bool OnTouch(Android.Views.View v, MotionEvent e)
         {
-           
-           if(e.Action== MotionEventActions.Up)
-           {
-               handler.SendMessageDelayed(handler.ObtainMessage(touchEventId, v), 5);
-           }
-           return false;
+            if (e.Action == MotionEventActions.Up)
+            {
+                handler.SendMessageDelayed(handler.ObtainMessage(ScrollView_Android.TouchEventId, v), 5);
+            }
+            return false;
         }
 
-        public class MyHandler:Handler
+    }
+
+    public class CustomPagerAdapter : PagerAdapter
+    {
+        private Context _context;
+        private IList _views;
+        public CustomPagerAdapter(Context context,IEnumerable views)
         {
-            public override void HandleMessage(Message msg)
+            _views = new List<Xamarin.Forms.View>();
+            foreach (var item in views)
             {
-                base.HandleMessage(msg);
-                var scroller = (Android.Views.View) msg.Obj;
-                if (msg.What == touchEventId)
-                {
-                    if (lastX == scroller.ScrollX)
-                    {
-                        //停止了，此处你的操作业务
-                        _scrollView.OnEndScroll();
-                    } 
-                    else
-                    {
-                        this.SendMessageDelayed(this.ObtainMessage(touchEventId, scroller), 1);
-                        lastX = scroller.ScrollX;
-                    }
-                }
+                _views.Add(item);
+            }
+            _context = context;
+        }
+        public override int Count
+        {
+            get
+            {
+                return _views.Count;
             }
         }
+
+        
+        public override Java.Lang.Object InstantiateItem(Android.Views.View container, int position)
+        {
+            var viewPager = container.JavaCast<ViewPager>();
+            var view = _views[position] as Xamarin.Forms.View;
+            var renderer = Platform.GetRenderer(view);
+            var viewGroup = renderer.ViewGroup;
+            return viewGroup;
+        }
+
+        public override bool IsViewFromObject(Android.Views.View view, Java.Lang.Object objectValue)
+        {
+            return view == objectValue;
+        }
+        public override void DestroyItem(Android.Views.View container, int position, Java.Lang.Object view)
+        {
+            var viewPager = container.JavaCast<ViewPager>();
+            viewPager.RemoveView(view as Android.Views.View);
+        }
+
+        
     }
 }
