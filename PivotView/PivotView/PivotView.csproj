@@ -72,7 +72,7 @@
     <Compile Include="TestVIew3.xaml.cs">
       <DependentUpon>TestVIew3.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ViewPager.cs" />
+    <Compile Include="ViewPanel.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="App.xaml">

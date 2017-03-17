@@ -19,15 +19,17 @@ using Java.Lang;
 using System.Collections;
 using Xamarin.Forms.PlatformConfiguration.WindowsSpecific;
 
-[assembly: ExportRenderer(typeof(CustomViewPager), typeof(ScrollView_Android))]
+[assembly: ExportRenderer(typeof(ViewPanel), typeof(ScrollView_Android))]
 namespace PivotView.Droid
 {
-    public class ScrollView_Android:ViewRenderer<CustomViewPager, ViewPager>
+    public class ScrollView_Android:ViewRenderer<ViewPanel, ViewPager>
     {
-        
-        protected override void OnElementChanged(ElementChangedEventArgs<CustomViewPager> e)
+        private ViewPanel _viewPanel;
+        private ViewPager _viewPager;
+        protected override void OnElementChanged(ElementChangedEventArgs<ViewPanel> e)
         {
             base.OnElementChanged(e);
+            _viewPanel = this.Element;
             if (this.Control == null)
             {
                 //var viewpager = (this.Context as Activity).LayoutInflater.Inflate(Resource.Layout.CustomViewPager, this.Control,true) as ViewPager;
@@ -39,24 +41,36 @@ namespace PivotView.Droid
 
                 var viewpager = new ViewPager(this.Context);
                 viewpager.Adapter = new CustomPagerAdapter(this.Context, this.Element);
-
-                //root.AddView(viewpager, LayoutParams.MatchParent, LayoutParams.MatchParent);
+                viewpager.PageSelected += Viewpager_PageSelected;
                 
-
+                //root.AddView(viewpager, LayoutParams.MatchParent, LayoutParams.MatchParent);
+                _viewPager = viewpager;
+                _viewPanel.Select = Select;
 
                 this.SetNativeControl(viewpager);
 
 
             }
         }
+        public void Select(int index)
+        {
+            _viewPager.SetCurrentItem(index, true);
+        }
+        private void Viewpager_PageSelected(object sender, ViewPager.PageSelectedEventArgs e)
+        {
+            if (_viewPanel == null)
+                return;
+            _viewPanel.CurrentIndex = e.Position;
+            _viewPanel.OnSelectChanged();
+        }
     }
 
     public class CustomPagerAdapter : PagerAdapter
     {
-        private CustomViewPager _customViewPage;
+        private ViewPanel _customViewPage;
         private Context _context;
         private IList _views = new List<Xamarin.Forms.View>();
-        public CustomPagerAdapter(Context context, CustomViewPager customViewPage)
+        public CustomPagerAdapter(Context context, ViewPanel customViewPage)
         {
             _customViewPage = customViewPage;
             _views = customViewPage.Children ;

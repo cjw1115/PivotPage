@@ -3,5 +3,5 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="PivotView.CustomViewPageDemo"
              xmlns:local="clr-namespace:PivotView">
-    <local:CustomViewPager x:Name="viewPage"></local:CustomViewPager>
+    <local:ViewPanel x:Name="viewPage"></local:ViewPanel>
 </ContentPage>
