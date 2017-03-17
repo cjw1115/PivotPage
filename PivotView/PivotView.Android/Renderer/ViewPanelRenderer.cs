@@ -19,10 +19,10 @@ using Java.Lang;
 using System.Collections;
 using Xamarin.Forms.PlatformConfiguration.WindowsSpecific;
 
-[assembly: ExportRenderer(typeof(ViewPanel), typeof(ScrollView_Android))]
+[assembly: ExportRenderer(typeof(ViewPanel), typeof(ViewPanelRenderer))]
 namespace PivotView.Droid
 {
-    public class ScrollView_Android:ViewRenderer<ViewPanel, ViewPager>
+    public class ViewPanelRenderer:ViewRenderer<ViewPanel, ViewPager>
     {
         private ViewPanel _viewPanel;
         private ViewPager _viewPager;
@@ -32,30 +32,28 @@ namespace PivotView.Droid
             _viewPanel = this.Element;
             if (this.Control == null)
             {
-                //var viewpager = (this.Context as Activity).LayoutInflater.Inflate(Resource.Layout.CustomViewPager, this.Control,true) as ViewPager;
-                //var viewpager = new ViewPager(this.Context);
-                
-                //var root = new Android.Widget.RelativeLayout(this.Context);
-
-                //root.SetBackgroundColor(Color.Green.ToAndroid());
-
                 var viewpager = new ViewPager(this.Context);
                 viewpager.Adapter = new CustomPagerAdapter(this.Context, this.Element);
                 viewpager.PageSelected += Viewpager_PageSelected;
                 
-                //root.AddView(viewpager, LayoutParams.MatchParent, LayoutParams.MatchParent);
+                this.SetNativeControl(viewpager);
                 _viewPager = viewpager;
                 _viewPanel.Select = Select;
-
-                this.SetNativeControl(viewpager);
-
-
             }
         }
+        /// <summary>
+        /// 根据索引设置ViewPager中显示项
+        /// </summary>
+        /// <param name="index">索引，从0开始</param>
         public void Select(int index)
         {
             _viewPager.SetCurrentItem(index, true);
         }
+        /// <summary>
+        /// ViewPager中显示的视图发生变化后，通知ViewPannel
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Viewpager_PageSelected(object sender, ViewPager.PageSelectedEventArgs e)
         {
             if (_viewPanel == null)
@@ -65,6 +63,9 @@ namespace PivotView.Droid
         }
     }
 
+    /// <summary>
+    /// ViewPager对应的Adapter
+    /// </summary>
     public class CustomPagerAdapter : PagerAdapter
     {
         private ViewPanel _customViewPage;
@@ -106,7 +107,6 @@ namespace PivotView.Droid
             var viewPager = container.JavaCast<ViewPager>();
             viewPager.RemoveView(view as Android.Views.View);
         }
-
         
     }
 }

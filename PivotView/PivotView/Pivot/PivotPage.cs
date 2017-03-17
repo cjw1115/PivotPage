@@ -9,6 +9,12 @@ using Xamarin.Forms;
 
 namespace PivotView
 {
+    /// <summary>
+    /// 多页面切换控件，页面类型为Xamarin.Forms.View
+    /// 支持数据绑定,可结合MVVM使用
+    /// 安卓:利用ViewPager实现
+    /// iOS:利用Forms直接实现，中途用到了iOS中UISCrollView的PagedEnable效果
+    /// </summary>
     public class PivotPage:ContentPage
     {
         private Grid _grid;
@@ -55,17 +61,26 @@ namespace PivotView
             _viewPanel.Select?.Invoke(index);
         }
 
+        /// <summary>
+        /// Header中选中项的DataTemplate
+        /// </summary>
         public DataTemplate SelectedDataTemplate
         {
             get { return _headerList.SelectedItemTemplate; }
             set { _headerList.SelectedItemTemplate = value; }
         }
+        /// <summary>
+        /// Header中未选中项的DataTemplate
+        /// </summary>
         public DataTemplate NornamlDataTemplate
         {
             get { return _headerList.ItemTemplate; }
             set { _headerList.ItemTemplate = value; }
         }
 
+        /// <summary>
+        /// PivotPage的第一组成部分Header
+        /// </summary>
         public static readonly BindableProperty HeadersProperty = BindableProperty.Create("Headers", typeof(IEnumerable), typeof(PivotPage), null, propertyChanged: OnHeadersPropertyChnaged);
         public IEnumerable Headers
         {
@@ -83,6 +98,9 @@ namespace PivotView
             pivot._headerList.ItemsSource = (IEnumerable)newValue;
         }
 
+        /// <summary>
+        /// PivotPage第二组成部分Views
+        /// </summary>
         public static readonly BindableProperty ViewsProperty = BindableProperty.Create("Views", typeof(IEnumerable), typeof(PivotPage), null, propertyChanged: OnViewsPropertyChnaged);
         public IEnumerable Views
         {

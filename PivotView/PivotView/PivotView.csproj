@@ -38,8 +38,8 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="CustomViewPageDemo.xaml.cs">
-      <DependentUpon>CustomViewPageDemo.xaml</DependentUpon>
+    <Compile Include="ViewPanelDemo.xaml.cs">
+      <DependentUpon>ViewPanelDemo.xaml</DependentUpon>
     </Compile>
     <Compile Include="DemoTabbedPage.xaml.cs">
       <DependentUpon>DemoTabbedPage.xaml</DependentUpon>
@@ -52,27 +52,26 @@
     <Compile Include="FlowLayout\FlowLayoutPage.xaml.cs">
       <DependentUpon>FlowLayoutPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MokeyView.xaml.cs">
-      <DependentUpon>MokeyView.xaml</DependentUpon>
+    <Compile Include="PivotPageMokeyView.xaml.cs">
+      <DependentUpon>PivotPageMokeyView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pivot\PivotPage.cs" />
     <Compile Include="Pivot\PivotViewMdoel.cs" />
-    <Compile Include="Pivot\HorizentalLayout.cs" />
     <Compile Include="Pivot\PivotXamlPage.xaml.cs">
       <DependentUpon>PivotXamlPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Pivot\ScrollViewExpand.cs" />
-    <Compile Include="TestView.xaml.cs">
-      <DependentUpon>TestView.xaml</DependentUpon>
+    <Compile Include="PivotPageTestView.xaml.cs">
+      <DependentUpon>PivotPageTestView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="TestView2.xaml.cs">
-      <DependentUpon>TestView2.xaml</DependentUpon>
+    <Compile Include="PivotPageTestView2.xaml.cs">
+      <DependentUpon>PivotPageTestView2.xaml</DependentUpon>
     </Compile>
-    <Compile Include="TestVIew3.xaml.cs">
-      <DependentUpon>TestVIew3.xaml</DependentUpon>
+    <Compile Include="PivotPageTestVIew3.xaml.cs">
+      <DependentUpon>PivotPageTestVIew3.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ViewPanel.cs" />
+    <Compile Include="Pivot\ViewPanel.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="App.xaml">
@@ -120,25 +119,25 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="MokeyView.xaml">
+    <EmbeddedResource Include="PivotPageMokeyView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="TestView.xaml">
+    <EmbeddedResource Include="PivotPageTestView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="TestView2.xaml">
+    <EmbeddedResource Include="PivotPageTestView2.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="TestVIew3.xaml">
+    <EmbeddedResource Include="PivotPageTestVIew3.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -150,7 +149,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="CustomViewPageDemo.xaml">
+    <EmbeddedResource Include="ViewPanelDemo.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>

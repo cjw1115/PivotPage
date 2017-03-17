@@ -8,10 +8,10 @@ using UIKit;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
 
-[assembly:ExportRenderer(typeof(ViewPanel),typeof(ScrollView_iOS))]
+[assembly:ExportRenderer(typeof(ViewPanel),typeof(ViewPanelRenderer))]
 namespace PivotView.iOS
 {
-    public class ScrollView_iOS: ScrollViewRenderer
+    public class ViewPanelRenderer: ScrollViewRenderer
     {
         private ViewPanel _viewPanel;
         protected override void OnElementChanged(VisualElementChangedEventArgs e)
