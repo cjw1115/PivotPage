@@ -11,13 +11,13 @@ using Android.Views;
 using Android.Widget;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
-using PivotView;
 using PivotView.Droid;
 using static Android.Views.View;
 using Android.Support.V4.View;
 using Java.Lang;
 using System.Collections;
 using Xamarin.Forms.PlatformConfiguration.WindowsSpecific;
+using PivotPagePortable;
 
 [assembly: ExportRenderer(typeof(ViewPanel), typeof(ViewPanelRenderer))]
 namespace PivotView.Droid

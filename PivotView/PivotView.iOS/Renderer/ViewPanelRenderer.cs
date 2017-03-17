@@ -1,4 +1,5 @@
 ﻿using CoreGraphics;
+using PivotPagePortable;
 using PivotView;
 using PivotView.iOS;
 using System;

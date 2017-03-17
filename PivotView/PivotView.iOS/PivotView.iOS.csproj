@@ -143,12 +143,6 @@
     <Reference Include="Xamarin.iOS" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\PivotView\PivotView.csproj">
-      <Project>{cfc50f97-3e7f-4cd2-bba9-a16db8ddb8f4}</Project>
-      <Name>PivotView</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <BundleResource Include="Resources\pic1.png" />
   </ItemGroup>
   <ItemGroup>
@@ -168,6 +162,16 @@
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\CQ.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\PivotPagePortable\PivotPageProtable.csproj">
+      <Project>{67f9d3a8-f71e-4428-913f-c37ae82cdb24}</Project>
+      <Name>PivotPageProtable</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PivotPageDemo\PivotViewDemo.csproj">
+      <Project>{aa4e00da-27fc-4caa-b793-a0616698deae}</Project>
+      <Name>PivotViewDemo</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <Import Project="..\..\packages\Xamarin.Forms.2.3.3.193\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets" Condition="Exists('..\..\packages\Xamarin.Forms.2.3.3.193\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets')" />

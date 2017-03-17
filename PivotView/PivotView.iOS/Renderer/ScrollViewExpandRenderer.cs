@@ -1,4 +1,5 @@
-﻿using PivotView;
+﻿using PivotPagePortable;
+using PivotView;
 using PivotView.iOS;
 using System;
 using System.Collections.Generic;

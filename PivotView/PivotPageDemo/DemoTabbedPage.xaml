@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PivotPageDemo.DemoTabbedPage"
+            xmlns:xf="clr-namespace:Xamarin.Forms;assembly=Xamarin.Forms.Core"
+             xmlns:pages="clr-namespace:PivotPageDemo;assembly=PivotPageDemo"
+            xmlns:protable="clr-namespace:PivotPagePortable;assembly=PivotPagePortable"
+             Title="TabbedPage">
+    <TabbedPage.Padding>
+        
+    </TabbedPage.Padding>
+    
+  <!--Pages can be added as references or inline-->
+    <protable:PivotPage  Title="Mokey" 
+                  
+                  Headers="{Binding Headers,Mode=OneWay}"
+                  Views="{Binding Views,Mode=OneWay}"
+                 >
+        <protable:PivotPage.Padding>
+            <OnPlatform x:TypeArguments="Thickness">
+                <OnPlatform.iOS>
+                    0, 20, 0, 0
+                </OnPlatform.iOS>
+            </OnPlatform>
+        </protable:PivotPage.Padding>
+        <protable:PivotPage.NornamlDataTemplate>
+            <DataTemplate>
+                <ViewCell>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="30"/>
+                            <RowDefinition Height="auto"/>
+                        </Grid.RowDefinitions>
+                        <Label Grid.Row="0" Text="{Binding Title}" TextColor="Gray"  VerticalOptions="Center"></Label>
+                        <BoxView Grid.Row="1" HeightRequest="2" BackgroundColor="Gray"></BoxView>
+                    </Grid>
+                </ViewCell>
+            </DataTemplate>
+        </protable:PivotPage.NornamlDataTemplate>
+        <protable:PivotPage.SelectedDataTemplate>
+            <DataTemplate>
+                <ViewCell>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="30"/>
+                            <RowDefinition Height="auto"/>
+                        </Grid.RowDefinitions>
+                        <Label Grid.Row="0" Text="{Binding Title}" TextColor="Red"  VerticalOptions="Center"></Label>
+                        <BoxView Grid.Row="1" HeightRequest="2" BackgroundColor="Red"></BoxView>
+                    </Grid>
+                </ViewCell>
+            </DataTemplate>
+        </protable:PivotPage.SelectedDataTemplate>
+        <protable:PivotPage.BindingContext>
+            <pages:PivotViewMdoel></pages:PivotViewMdoel>
+        </protable:PivotPage.BindingContext>
+    </protable:PivotPage>
+    <pages:FlowLayoutPage>
+        <pages:FlowLayoutPage.Padding>
+            <OnPlatform x:TypeArguments="Thickness">
+                <OnPlatform.iOS>
+                    0, 20, 0, 0
+                </OnPlatform.iOS>
+            </OnPlatform>
+        </pages:FlowLayoutPage.Padding>
+    </pages:FlowLayoutPage>
+    <ContentPage Title="Tab 2">
+        <ContentPage.Padding>
+            <OnPlatform x:TypeArguments="Thickness">
+                <OnPlatform.iOS>
+                    0, 20, 0, 0
+                </OnPlatform.iOS>
+            </OnPlatform>
+        </ContentPage.Padding>
+        <StackLayout>
+            <Label Text="Green"  HorizontalTextAlignment="Center" HorizontalOptions="FillAndExpand" Margin="5" />
+            <BoxView Color="Green" VerticalOptions="FillAndExpand" />
+        </StackLayout>
+    </ContentPage>
+</TabbedPage>
