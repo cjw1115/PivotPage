@@ -38,6 +38,9 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="CustomViewPageDemo.xaml.cs">
+      <DependentUpon>CustomViewPageDemo.xaml</DependentUpon>
+    </Compile>
     <Compile Include="DemoTabbedPage.xaml.cs">
       <DependentUpon>DemoTabbedPage.xaml</DependentUpon>
     </Compile>
@@ -69,6 +72,7 @@
     <Compile Include="TestVIew3.xaml.cs">
       <DependentUpon>TestVIew3.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewPager.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="App.xaml">
@@ -141,6 +145,12 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Pivot\PivotXamlPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="CustomViewPageDemo.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>

@@ -17,55 +17,49 @@ using static Android.Views.View;
 using Android.Support.V4.View;
 using Java.Lang;
 using System.Collections;
+using Xamarin.Forms.PlatformConfiguration.WindowsSpecific;
 
-[assembly: ExportRenderer(typeof(HorizentalLayout), typeof(ScrollView_Android))]
+[assembly: ExportRenderer(typeof(CustomViewPager), typeof(ScrollView_Android))]
 namespace PivotView.Droid
 {
-    public class ScrollView_Android:ViewRenderer<HorizentalLayout, ViewPager>
+    public class ScrollView_Android:ViewRenderer<CustomViewPager, ViewPager>
     {
-        public static int TouchEventId => -9983761;
-        private Handler handler;
-        protected override void OnElementChanged(ElementChangedEventArgs<HorizentalLayout> e)
+        
+        protected override void OnElementChanged(ElementChangedEventArgs<CustomViewPager> e)
         {
             base.OnElementChanged(e);
             if (this.Control == null)
             {
-                var viewpager = (this.Context as Activity).LayoutInflater.Inflate(Resource.Layout.CustomViewPager, null) as ViewPager;
+                //var viewpager = (this.Context as Activity).LayoutInflater.Inflate(Resource.Layout.CustomViewPager, this.Control,true) as ViewPager;
+                //var viewpager = new ViewPager(this.Context);
+                
+                //var root = new Android.Widget.RelativeLayout(this.Context);
 
-                viewpager.Adapter = new CustomPagerAdapter(this.Context, this.Element.Children);
-                SetNativeControl(viewpager);
+                //root.SetBackgroundColor(Color.Green.ToAndroid());
+
+                var viewpager = new ViewPager(this.Context);
+                viewpager.Adapter = new CustomPagerAdapter(this.Context, this.Element);
+
+                //root.AddView(viewpager, LayoutParams.MatchParent, LayoutParams.MatchParent);
+                
+
+
+                this.SetNativeControl(viewpager);
+
 
             }
         }
-
-        private void ScrollView_Android_Touch(object sender, TouchEventArgs e)
-        {
-            e.Handled = true;
-
-        }
-
-        public bool OnTouch(Android.Views.View v, MotionEvent e)
-        {
-            if (e.Action == MotionEventActions.Up)
-            {
-                handler.SendMessageDelayed(handler.ObtainMessage(ScrollView_Android.TouchEventId, v), 5);
-            }
-            return false;
-        }
-
     }
 
     public class CustomPagerAdapter : PagerAdapter
     {
+        private CustomViewPager _customViewPage;
         private Context _context;
-        private IList _views;
-        public CustomPagerAdapter(Context context,IEnumerable views)
+        private IList _views = new List<Xamarin.Forms.View>();
+        public CustomPagerAdapter(Context context, CustomViewPager customViewPage)
         {
-            _views = new List<Xamarin.Forms.View>();
-            foreach (var item in views)
-            {
-                _views.Add(item);
-            }
+            _customViewPage = customViewPage;
+            _views = customViewPage.Children ;
             _context = context;
         }
         public override int Count
@@ -76,13 +70,16 @@ namespace PivotView.Droid
             }
         }
 
-        
         public override Java.Lang.Object InstantiateItem(Android.Views.View container, int position)
         {
             var viewPager = container.JavaCast<ViewPager>();
             var view = _views[position] as Xamarin.Forms.View;
+            view.Parent = _customViewPage;
+            if (Platform.GetRenderer(view) == null)
+                Platform.SetRenderer(view, Platform.CreateRenderer(view));
             var renderer = Platform.GetRenderer(view);
             var viewGroup = renderer.ViewGroup;
+            viewPager.AddView(viewGroup);
             return viewGroup;
         }
 

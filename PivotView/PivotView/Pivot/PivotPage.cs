@@ -15,8 +15,8 @@ namespace PivotView
         private ItemsControl _headerList;
         private BoxView _block;
         private ScrollViewExpand _scrollView;
-        private HorizentalLayout _viewPannel;
-        
+        //private HorizentalLayout _viewPannel;
+        private CustomViewPager _viewPannel;
         void InitLayout()
         {
             _grid = new Grid();
@@ -40,12 +40,14 @@ namespace PivotView
             _scrollView.Orientation = ScrollOrientation.Horizontal;
             _scrollView.SetValue(Grid.RowProperty, 2);
 
-            _viewPannel = new HorizentalLayout();
-            _scrollView.Content = _viewPannel;
+            _viewPannel = new  CustomViewPager();
+            _viewPannel.SetValue(Grid.RowProperty, 2);
+            //_scrollView.Content = _viewPannel;
 
             _grid.Children.Add(_headerList);
             _grid.Children.Add(_block);
-            _grid.Children.Add(_scrollView);
+            //_grid.Children.Add(_scrollView);
+            _grid.Children.Add(_viewPannel);
 
             this.Content = _grid;
         }
@@ -166,11 +168,13 @@ namespace PivotView
 
         static void OnViewsPropertyChnaged(BindableObject sender, object oldValue, object newValue)
         {
+            //var pivot = sender as PivotPage;
+            //foreach (var item in (IEnumerable)newValue)
+            //{
+            //    pivot._viewPannel.Children.Add(item as View);
+            //}
             var pivot = sender as PivotPage;
-            foreach (var item in (IEnumerable)newValue)
-            {
-                pivot._viewPannel.Children.Add(item as View);
-            }
+            pivot._viewPannel.Children = (IList)newValue;
         }
         protected override void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
