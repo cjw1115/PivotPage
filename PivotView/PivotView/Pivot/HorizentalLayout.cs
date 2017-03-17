@@ -11,7 +11,7 @@ namespace PivotView
     {
         public HorizentalLayout()
         {
-            this.Orientation = StackOrientation.Horizontal;
+            base.Orientation=StackOrientation.Horizontal;
         }
         public new StackOrientation Orientation
         {

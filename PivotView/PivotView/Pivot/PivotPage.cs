@@ -13,9 +13,6 @@ namespace PivotView
     {
         private Grid _grid;
         private ItemsControl _headerList;
-        private BoxView _block;
-        //private ScrollViewExpand _scrollView;
-        //private HorizentalLayout _viewPanel;
         private ViewPanel _viewPanel;
         void InitLayout()
         {
@@ -27,27 +24,10 @@ namespace PivotView
             _headerList = new ItemsControl();
             _headerList.SetValue(Grid.RowProperty, 0);
 
-            _block = new BoxView();
-            _block.HeightRequest = 2;
-            _block.WidthRequest = 50;
-            _block.HorizontalOptions = LayoutOptions.Start;
-            _block.VerticalOptions = LayoutOptions.Start;
-
-            _block.BackgroundColor = Color.Red;
-            _block.SetValue(Grid.RowProperty, 1);
-
-            //_scrollView = new ScrollViewExpand();
-            //_scrollView.Orientation = ScrollOrientation.Horizontal;
-            //_scrollView.SetValue(Grid.RowProperty, 2);
-
-            _viewPanel = new ViewPanel();
+            _viewPanel = new ViewPanel() { Orientation= ScrollOrientation.Horizontal};
             _viewPanel.SetValue(Grid.RowProperty, 2);
             
-            //_scrollView.Content = _viewPanel;
-
             _grid.Children.Add(_headerList);
-            _grid.Children.Add(_block);
-            //_grid.Children.Add(_scrollView);
             _grid.Children.Add(_viewPanel);
 
             this.Content = _grid;
@@ -58,13 +38,6 @@ namespace PivotView
 
             _headerList.ItemSelected += headerList_ItemSelected;
             _viewPanel.SelectChanged += _viewPanel_SelectChanged;
-            //_scrollView.BeginScroll += _scrollView_BeginScroll;
-            //_scrollView.EndScroll += _scrollView_EndScroll;
-            //_scrollView.Scrolled += _scrollView_Scrolled;
-
-            //_headerList.PannelScrollStarted += _headerList_PannelScrollStarted;
-            //_headerList.PannelScrollStopped += _headerList_PannelScrollStopped ;
-            //_headerList.PannelScrolled += _headerList_PannelScrolled;
         }
 
         private void _viewPanel_SelectChanged(object sender, SelectedPositionChangedEventArgs e)
@@ -73,74 +46,12 @@ namespace PivotView
             _headerList.SelectedIndex = index;
         }
 
-        //private double oldBlockScrollX;
-        //private void _headerList_PannelScrolled(object sender, ScrolledEventArgs e)
-        //{
-        //    _block.TranslateTo(oldBlockScrollX  - e.ScrollX, _block.TranslationY);
-
-        //}
-
-        //private double oldPostion;
-        //private void _headerList_PannelScrollStopped(object sender, EventArgs e)
-        //{
-        //    throw new NotImplementedException();
-        //}
-
-        //private void _headerList_PannelScrollStarted(object sender, EventArgs e)
-        //{
-        //    throw new NotImplementedException();
-        //}
-
-
-        /// <summary>
-        /// 指示滑块
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void _scrollView_Scrolled(object sender, ScrolledEventArgs e)
-        {
-            //var x=_scrollView.ScrollX * _headerList.RealWidth / _scrollView.ContentSize.Width;
-            //_block.TranslateTo(x-_headerList.ScrollX, _block.TranslationY);
-            
-        }
-
-        //private void _scrollView_EndScroll(object sender, EventArgs e)
-        //{
-        //    var index = (int)(_scrollView.ScrollX / _scrollView.Width);
-        //    if(_scrollView.Width/2<(_scrollView.ScrollX % _scrollView.Width))
-        //    {
-        //        index++;
-        //    }
-        //    //ScrollTo(index, true);
-        //    _headerList.SelectedIndex = index;
-        //}
-
-        private bool isScrolled = false;
-        private void _scrollView_BeginScroll(object sender, EventArgs e)
-        {
-            isScrolled = true;
-
-        }
-
         private void headerList_ItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
-            if (isScrolled == false)
-            {
-                ScrollTo(_headerList.SelectedIndex, false);
-            }
-            else
-            {
-                isScrolled = false;
-            }
-            //var perWidth=scrollView.ContentSize.Width / headerList.Count;
-            //scrollView.ScrollToAsync(headerList.SelectedIndex* perWidth, scrollView.ScrollY, true);
-            
-
+            ScrollTo(_headerList.SelectedIndex, false);
         }
         public void ScrollTo(int index,bool animation)
         {
-            //var perWidth = _scrollView.Width;
-            //_scrollView.ScrollToAsync(index * perWidth, _scrollView.ScrollY, animation);
             _viewPanel.Select?.Invoke(index);
         }
 
@@ -181,11 +92,6 @@ namespace PivotView
 
         static void OnViewsPropertyChnaged(BindableObject sender, object oldValue, object newValue)
         {
-            //var pivot = sender as PivotPage;
-            //foreach (var item in (IEnumerable)newValue)
-            //{
-            //    pivot._viewPanel.Children.Add(item as View);
-            //}
             var pivot = sender as PivotPage;
             pivot._viewPanel.Children = (IList)newValue;
         }
