@@ -4,7 +4,7 @@ using System.Linq;
 
 using Foundation;
 using UIKit;
-
+using PivotPageDemo;
 namespace PivotView.iOS
 {
     // The UIApplicationDelegate for the application. This class is responsible for launching the 
