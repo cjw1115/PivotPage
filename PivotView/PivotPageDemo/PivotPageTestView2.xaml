@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <ContentView xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="PivotPageDemo.TestView2">
   <ContentView.Content>
-        <Grid>
-            <BoxView BackgroundColor="Red" VerticalOptions="Center"></BoxView>
+        <Grid BackgroundColor="Blue" >
+            <Button Text="你好" HorizontalOptions="CenterAndExpand" ></Button>
         </Grid>
     </ContentView.Content>
 </ContentView>

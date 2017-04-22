@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,13 +15,15 @@ namespace PivotPagePortable
     /// </summary>
     public class ViewPanel : ScrollView
     {
+        public static ViewPanel Panel{ get; set; }
         /// <summary>
         /// 只在IOS中有用，充当试图真实的容器
         /// </summary>
-        private StackLayout _horizentalLayout;
+        private HorizontalStackLayout _horizentalLayout;
         public ViewPanel()
         {
-            _horizentalLayout = new StackLayout() {  Orientation =  StackOrientation.Horizontal};
+            Panel = this;
+            _horizentalLayout = new HorizontalStackLayout() { Spacing = 0 };
             this.Content = _horizentalLayout;
         }
         /// <summary>
@@ -58,9 +61,23 @@ namespace PivotPagePortable
         /// </summary>
         /// <param name="width">宽度</param>
         /// <param name="height">高度</param>
-        protected override void OnSizeAllocated(double width, double height)
+        //protected override void OnSizeAllocated(double width, double height)
+        //{
+        //    base.OnSizeAllocated(width, height);
+        //    if (Children == null)
+        //        return;
+        //    if(Device.OS== TargetPlatform.Android)
+        //    {
+        //        foreach (View item in Children)
+        //        {
+        //            item.Layout(new Rectangle(0, 0, width, height));
+        //        }
+        //    }
+        //}
+        
+        protected override void LayoutChildren(double x, double y, double width, double height)
         {
-            base.OnSizeAllocated(width, height);
+            base.LayoutChildren(x, y, width, height);
             if (Children == null)
                 return;
             if(Device.OS== TargetPlatform.Android)

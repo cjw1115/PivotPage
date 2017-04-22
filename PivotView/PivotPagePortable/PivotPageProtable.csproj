@@ -37,6 +37,7 @@
   <ItemGroup>
     <Compile Include="FlowLayout\FlowLayout.cs" />
     <Compile Include="ItemsControl\ItemsControl.cs" />
+    <Compile Include="Pivot\HorizentalStackLayout.cs" />
     <Compile Include="Pivot\PivotPage.cs" />
     <Compile Include="Pivot\ScrollViewExpand.cs" />
     <Compile Include="Pivot\ViewPanel.cs" />

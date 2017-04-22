@@ -113,13 +113,13 @@ namespace PivotPagePortable
             var pivot = sender as PivotPage;
             pivot._viewPanel.Children = (IList)newValue;
         }
-        protected override void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            base.OnPropertyChanged(propertyName);
-            if (propertyName == nameof(NornamlDataTemplate))
-            {
-                this._headerList.ItemsSource = this.Headers;
-            }
-        }
+        //protected override void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        //{
+        //    base.OnPropertyChanged(propertyName);
+        //    if (propertyName == nameof(NornamlDataTemplate))
+        //    {
+        //        this._headerList.ItemsSource = this.Headers;
+        //    }
+        //}
     }
 }
