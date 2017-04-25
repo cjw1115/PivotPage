@@ -25,10 +25,10 @@ namespace PivotView.iOS
             ((ScrollViewRenderer)this.NativeView).DecelerationEnded += ScrollView_DecelerationEnded;
         }
 
-        public void Select(int index)
+        public void Select(int index,bool animate=true)
         {
             var perWidth = _viewPanel.Width;
-            _viewPanel.ScrollToAsync(index * perWidth, _viewPanel.ScrollY,true);
+            _viewPanel.ScrollToAsync(index * perWidth, _viewPanel.ScrollY, animate);
         }
         
         private void ScrollView_DecelerationEnded(object sender, EventArgs e)

@@ -38,6 +38,9 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="CarousalViewDemo.xaml.cs">
+      <DependentUpon>CarousalViewDemo.xaml</DependentUpon>
+    </Compile>
     <Compile Include="DemoTabbedPage.xaml.cs">
       <DependentUpon>DemoTabbedPage.xaml</DependentUpon>
     </Compile>
@@ -60,13 +63,7 @@
       <DependentUpon>PivotPageTestVIew3.xaml</DependentUpon>
     </Compile>
     <Compile Include="PivotViewMdoel.cs" />
-    <Compile Include="PivotXamlPage.xaml.cs">
-      <DependentUpon>PivotXamlPage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ViewPanelDemo.xaml.cs">
-      <DependentUpon>ViewPanelDemo.xaml</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="App.xaml">
@@ -101,14 +98,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="PivotXamlPage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ViewPanelDemo.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Xamarin.Forms.Core, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -132,6 +121,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="DemoAssets\demo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="CarousalViewDemo.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="..\..\packages\Xamarin.Forms.2.3.3.193\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets" Condition="Exists('..\..\packages\Xamarin.Forms.2.3.3.193\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets')" />

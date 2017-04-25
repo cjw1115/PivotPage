@@ -54,11 +54,11 @@ namespace PivotPagePortable
 
         private void headerList_ItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
-            ScrollTo(_headerList.SelectedIndex, false);
+            ScrollTo(_headerList.SelectedIndex, true);
         }
         public void ScrollTo(int index,bool animation)
         {
-            _viewPanel.Select?.Invoke(index);
+            _viewPanel.Select?.Invoke(index,animation);
         }
 
         /// <summary>

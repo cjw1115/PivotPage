@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PivotPageDemo.CarousalViewDemo"
+             xmlns:local="clr-namespace:PivotPagePortable;assembly=PivotPagePortable">
+    <Grid BackgroundColor="Blue">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <local:CarousalView x:Name="cv" Grid.Row="0" ItemsSource="{Binding Items,Mode=OneWay}"
+                            Duration="3500" AutoPlay="True" BackgroundColor="Yellow">
+            <local:CarousalView.ItemTemplate>
+                <DataTemplate>
+                    <Image Source="{Binding Img}" Aspect="AspectFit" BackgroundColor="Red"/>
+                </DataTemplate>
+            </local:CarousalView.ItemTemplate>
+        </local:CarousalView>
+        <Button BackgroundColor="Black" Grid.Row="1" Text="我是按钮" Clicked="Button_Clicked"></Button>
+    </Grid>
+</ContentPage>

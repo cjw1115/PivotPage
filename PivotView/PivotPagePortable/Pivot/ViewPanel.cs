@@ -15,7 +15,7 @@ namespace PivotPagePortable
     /// </summary>
     public class ViewPanel : ScrollView
     {
-        public static ViewPanel Panel{ get; set; }
+        public static ViewPanel Panel { get; set; }
         /// <summary>
         /// 只在IOS中有用，充当试图真实的容器
         /// </summary>
@@ -23,13 +23,14 @@ namespace PivotPagePortable
         public ViewPanel()
         {
             Panel = this;
+            base.Orientation = ScrollOrientation.Horizontal;
             _horizentalLayout = new HorizontalStackLayout() { Spacing = 0 };
             this.Content = _horizentalLayout;
         }
         /// <summary>
         /// 支持数据绑定的Child View集合
         /// </summary>
-        public static readonly BindableProperty ChildrenProperty = BindableProperty.Create("Children", typeof(IList), typeof(ViewPanel),propertyChanged: OnChildrenChanged);
+        public static readonly BindableProperty ChildrenProperty = BindableProperty.Create("Children", typeof(IList), typeof(ViewPanel), propertyChanged: OnChildrenChanged);
         public IList Children
         {
             get { return (IList)this.GetValue(ChildrenProperty); }
@@ -42,9 +43,9 @@ namespace PivotPagePortable
         /// <param name="sender"></param>
         /// <param name="oldValue"></param>
         /// <param name="newValue"></param>
-        static void OnChildrenChanged(BindableObject sender,Object oldValue,Object newValue)
+        static void OnChildrenChanged(BindableObject sender, Object oldValue, Object newValue)
         {
-            if(Device.OS == TargetPlatform.iOS)
+            if (Device.OS == TargetPlatform.iOS)
             {
                 var viewPanel = sender as ViewPanel;
                 var stackLayout = viewPanel.Content as StackLayout;
@@ -53,34 +54,21 @@ namespace PivotPagePortable
                     stackLayout.Children.Add(item);
                 }
             }
-            
         }
 
-        /// <summary>
-        /// 为每一个Child View设置布局大小，此方法只使用于安卓，iOS中无效
-        /// </summary>
-        /// <param name="width">宽度</param>
-        /// <param name="height">高度</param>
-        //protected override void OnSizeAllocated(double width, double height)
-        //{
-        //    base.OnSizeAllocated(width, height);
-        //    if (Children == null)
-        //        return;
-        //    if(Device.OS== TargetPlatform.Android)
-        //    {
-        //        foreach (View item in Children)
-        //        {
-        //            item.Layout(new Rectangle(0, 0, width, height));
-        //        }
-        //    }
-        //}
-        
+        public static double MeasureWidth;
+        protected override SizeRequest OnMeasure(double widthConstraint, double heightConstraint)
+        {
+            MeasureWidth = widthConstraint;
+            return base.OnMeasure(widthConstraint, heightConstraint);
+        }
         protected override void LayoutChildren(double x, double y, double width, double height)
         {
+            MeasureWidth = width;
             base.LayoutChildren(x, y, width, height);
             if (Children == null)
                 return;
-            if(Device.OS== TargetPlatform.Android)
+            if (Device.OS == TargetPlatform.Android)
             {
                 foreach (View item in Children)
                 {
@@ -109,8 +97,8 @@ namespace PivotPagePortable
         /// 更具索引设置ViewPanel显示的View
         /// </summary>
         /// <param name="index">索引，从0开始</param>
-        public delegate void SelectDelegate(int index);
-        
-        public SelectDelegate Select{get;set;}
+        public delegate void SelectDelegate(int index,bool animate);
+
+        public SelectDelegate Select { get; set; }
     }
 }

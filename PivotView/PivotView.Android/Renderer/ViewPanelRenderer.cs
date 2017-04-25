@@ -35,7 +35,6 @@ namespace PivotView.Droid
                 var viewpager = new ViewPager(this.Context);
                 viewpager.Adapter = new CustomPagerAdapter(this.Context, this.Element);
                 viewpager.PageSelected += Viewpager_PageSelected;
-                
                 this.SetNativeControl(viewpager);
                 _viewPager = viewpager;
                 _viewPanel.Select = Select;
@@ -45,9 +44,9 @@ namespace PivotView.Droid
         /// 根据索引设置ViewPager中显示项
         /// </summary>
         /// <param name="index">索引，从0开始</param>
-        public void Select(int index)
+        public void Select(int index, bool animate = true)
         {
-            _viewPager.SetCurrentItem(index, true);
+            _viewPager.SetCurrentItem(index, animate);
         }
         /// <summary>
         /// ViewPager中显示的视图发生变化后，通知ViewPannel
@@ -81,7 +80,10 @@ namespace PivotView.Droid
         {
             get
             {
-                return _views.Count;
+                if (_views != null)
+                    return _views.Count;
+                else
+                    return 0;
             }
         }
 
