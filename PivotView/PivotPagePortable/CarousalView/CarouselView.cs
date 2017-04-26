@@ -10,9 +10,9 @@ using Xamarin.Forms;
 
 namespace PivotPagePortable
 {
-    public class CarousalView:ViewPanel
+    public class CarouselView : ViewPanel
     {
-        public CarousalView()
+        public CarouselView()
         {
             InnerPlay();
             this.SelectChanged += CarousalView_SelectChanged;
@@ -40,7 +40,7 @@ namespace PivotPagePortable
             }
         }
 
-        public static readonly BindableProperty ItemTemplateProperty = BindableProperty.Create("ItemTemplate", typeof(DataTemplate), typeof(CarousalView), defaultValue: default(DataTemplate));
+        public static readonly BindableProperty ItemTemplateProperty = BindableProperty.Create("ItemTemplate", typeof(DataTemplate), typeof(CarouselView), defaultValue: default(DataTemplate));
         public DataTemplate ItemTemplate
         {
             get { return (DataTemplate)this.GetValue(ItemTemplateProperty); }
@@ -52,15 +52,15 @@ namespace PivotPagePortable
             get { return (IList)GetValue(ItemsSourceProperty); }
             set { SetValue(ItemsSourceProperty, value); }
         }
-        public static readonly BindableProperty ItemsSourceProperty = BindableProperty.Create("ItemsSource", typeof(IList), typeof(CarousalView), propertyChanged: ItemsSourceChanged);
-        public static void ItemsSourceChanged(BindableObject sender,object oldValue,object newValue)
+        public static readonly BindableProperty ItemsSourceProperty = BindableProperty.Create("ItemsSource", typeof(IList), typeof(CarouselView), propertyChanged: ItemsSourceChanged);
+        public static void ItemsSourceChanged(BindableObject sender, object oldValue, object newValue)
         {
-            var cv = sender as CarousalView;
+            var cv = sender as CarouselView;
             var items = newValue as IList;
 
             cv.isPlaying = false;
 
-            if (items == null||items.Count<=0)
+            if (items == null || items.Count <= 0)
             {
                 return;
             }
@@ -71,7 +71,7 @@ namespace PivotPagePortable
 
             var views = new List<View>();
             var view = cv.ItemTemplate.CreateContent() as View;
-            view.BindingContext = items[items.Count-1];
+            view.BindingContext = items[items.Count - 1];
             views.Add(view);
             for (int i = 0; i < items.Count; i++)
             {
@@ -97,7 +97,7 @@ namespace PivotPagePortable
             get { return (int)GetValue(SelectedIndexProperty); }
             set { SetValue(SelectedIndexProperty, value); }
         }
-        public static readonly BindableProperty SelectedIndexProperty = BindableProperty.Create("SelectedIndex", typeof(int), typeof(CarousalView),defaultValue:0);
+        public static readonly BindableProperty SelectedIndexProperty = BindableProperty.Create("SelectedIndex", typeof(int), typeof(CarouselView), defaultValue: 0);
 
         private int realIndex = 1;
         public async Task Next()
@@ -105,7 +105,7 @@ namespace PivotPagePortable
             if (this.ItemsSource == null || this.ItemsSource.Count <= 2)
                 return;
             realIndex = (realIndex + 1) % (this.Children.Count);
-            if (realIndex == this.Children.Count-1)
+            if (realIndex == this.Children.Count - 1)
             {
                 Select(realIndex, true);
                 await Task.Delay(500);
@@ -115,7 +115,7 @@ namespace PivotPagePortable
                 SelectedIndex = 0;
             }
             else
-            {   
+            {
                 Select(realIndex, true);
                 SelectedIndex = realIndex - 1;
             }
@@ -126,7 +126,7 @@ namespace PivotPagePortable
             if (this.ItemsSource == null || this.ItemsSource.Count <= 2)
                 return;
 
-            realIndex = (realIndex -1 );
+            realIndex = (realIndex - 1);
             if (realIndex < 0)
                 realIndex = this.Children.Count - 1;
 
@@ -134,10 +134,10 @@ namespace PivotPagePortable
             {
                 Select(realIndex, true);
                 await Task.Delay(500);
-                Select(this.Children.Count-1, false);
+                Select(this.Children.Count - 1, false);
                 realIndex = this.Children.Count - 1;
 
-                SelectedIndex = this.ItemsSource.Count-1;
+                SelectedIndex = this.ItemsSource.Count - 1;
             }
             else
             {
@@ -151,16 +151,16 @@ namespace PivotPagePortable
             get { return (bool)GetValue(AutoPlayProperty); }
             set { SetValue(AutoPlayProperty, value); }
         }
-        public static readonly BindableProperty AutoPlayProperty = BindableProperty.Create("AutoPlay", typeof(bool), typeof(CarousalView), defaultValue: true,propertyChanged:(o,oldValue,newValue)=>
+        public static readonly BindableProperty AutoPlayProperty = BindableProperty.Create("AutoPlay", typeof(bool), typeof(CarouselView), defaultValue: true, propertyChanged: (o, oldValue, newValue) =>
         {
-            var cv = o as CarousalView;
+            var cv = o as CarouselView;
             if (cv.AutoPlay)
             {
                 cv.InnerPlay();
             }
         });
 
-        bool isPlaying=false;
+        bool isPlaying = false;
         void InnerPlay()
         {
             Task.Delay(Duration).ContinueWith(async t =>
@@ -180,7 +180,7 @@ namespace PivotPagePortable
                 {
 
                 }
-                
+
 
             }, TaskScheduler.FromCurrentSynchronizationContext());
         }
@@ -190,6 +190,11 @@ namespace PivotPagePortable
             get { return (int)GetValue(DurationProperty); }
             set { SetValue(DurationProperty, value); }
         }
-        public static readonly BindableProperty DurationProperty = BindableProperty.Create("Duration", typeof(int), typeof(CarousalView), defaultValue: 3000);
+        public static readonly BindableProperty DurationProperty = BindableProperty.Create("Duration", typeof(int), typeof(CarouselView), defaultValue: 3000);
+
+        public object Item
+        {
+            get { return this.ItemsSource[SelectedIndex]; }
+        }
     }
 }

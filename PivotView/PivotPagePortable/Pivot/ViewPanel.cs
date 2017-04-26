@@ -49,6 +49,7 @@ namespace PivotPagePortable
             {
                 var viewPanel = sender as ViewPanel;
                 var stackLayout = viewPanel.Content as StackLayout;
+                stackLayout.Children.Clear();
                 foreach (View item in viewPanel.Children)
                 {
                     stackLayout.Children.Add(item);
@@ -58,7 +59,7 @@ namespace PivotPagePortable
 
         protected override SizeRequest OnMeasure(double widthConstraint, double heightConstraint)
         {
-            if(Device.OS== TargetPlatform.iOS)
+            if (Device.OS == TargetPlatform.iOS)
             {
                 MeasureWidth = widthConstraint;
                 return _horizentalLayout.Measure(widthConstraint, heightConstraint);
@@ -68,7 +69,7 @@ namespace PivotPagePortable
                 double maxHeight = 0;
                 if (this.Children != null)
                 {
-                    
+
                     foreach (View item in Children)
                     {
                         var size = item.Measure(widthConstraint, heightConstraint);
@@ -78,14 +79,14 @@ namespace PivotPagePortable
                 }
                 return new SizeRequest(new Size(widthConstraint, maxHeight));
             }
-            
+
         }
 
         public static double MeasureWidth;
         protected override void LayoutChildren(double x, double y, double width, double height)
         {
             MeasureWidth = width;
-            if(Device.OS== TargetPlatform.iOS)
+            if (Device.OS == TargetPlatform.iOS)
             {
                 base.LayoutChildren(x, y, width, height);
             }
@@ -97,7 +98,7 @@ namespace PivotPagePortable
                     return;
                 }
                 foreach (View item in Children)
-                { 
+                {
                     item.Layout(new Rectangle(0, 0, width, height));
                 }
             }
@@ -123,8 +124,14 @@ namespace PivotPagePortable
         /// 更具索引设置ViewPanel显示的View
         /// </summary>
         /// <param name="index">索引，从0开始</param>
-        public delegate void SelectDelegate(int index,bool animate);
+        public delegate void SelectDelegate(int index, bool animate);
 
         public SelectDelegate Select { get; set; }
+
+        public event EventHandler Click;
+        public void OnClick()
+        {
+            Click?.Invoke(this,null);
+        }
     }
 }

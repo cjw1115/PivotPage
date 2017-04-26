@@ -64,6 +64,9 @@
       <DependentUpon>PivotPageTestVIew3.xaml</DependentUpon>
     </Compile>
     <Compile Include="PivotViewMdoel.cs" />
+    <Compile Include="PivotXamlPage.xaml.cs">
+      <DependentUpon>PivotXamlPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -126,6 +129,12 @@
   <ItemGroup>
     <EmbeddedResource Include="CarousalViewDemo.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="PivotXamlPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>

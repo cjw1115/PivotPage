@@ -9,9 +9,9 @@
             <RowDefinition Height="auto" />
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <protable:CarousalView x:Name="cv" Grid.Row="0" ItemsSource="{Binding Items,Mode=OneWay}"
+        <protable:CarouselView x:Name="cv" Grid.Row="0" ItemsSource="{Binding Items,Mode=OneWay}"
                             Duration="3500" AutoPlay="True" BackgroundColor="Yellow">
-            <protable:CarousalView.ItemTemplate>
+            <protable:CarouselView.ItemTemplate>
                 <DataTemplate>
                     <local:CustomImage Source="{Binding Img}" Aspect="AspectFit" BackgroundColor="Red"/>
                 </DataTemplate>

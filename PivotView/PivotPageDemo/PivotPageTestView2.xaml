@@ -2,7 +2,7 @@
 <ContentView xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="PivotPageDemo.TestView2">
   <ContentView.Content>
         <Grid BackgroundColor="Blue" >
-            <Button Text="你好" HorizontalOptions="CenterAndExpand" ></Button>
+            <Button Text="你好" ></Button>
         </Grid>
     </ContentView.Content>
 </ContentView>
