@@ -56,22 +56,47 @@ namespace PivotPagePortable
             }
         }
 
-        public static double MeasureWidth;
         protected override SizeRequest OnMeasure(double widthConstraint, double heightConstraint)
         {
-            MeasureWidth = widthConstraint;
-            return base.OnMeasure(widthConstraint, heightConstraint);
+            if(Device.OS== TargetPlatform.iOS)
+            {
+                return base.Measure(widthConstraint, heightConstraint);
+            }
+            else
+            {
+                double maxHeight = 0;
+                if (this.Children != null)
+                {
+                    foreach (View item in Children)
+                    {
+                        var size = item.Measure(widthConstraint, heightConstraint);
+                        if (size.Request.Height > maxHeight)
+                            maxHeight = size.Request.Height;
+                    }
+                }
+                return new SizeRequest(new Size(widthConstraint, maxHeight));
+            }
+            
         }
+
+        public static double MeasureWidth;
         protected override void LayoutChildren(double x, double y, double width, double height)
         {
             MeasureWidth = width;
-            base.LayoutChildren(x, y, width, height);
-            if (Children == null)
-                return;
+            if(Device.OS== TargetPlatform.iOS)
+            {
+
+                base.LayoutChildren(x, y, width, height);
+            }
+
             if (Device.OS == TargetPlatform.Android)
             {
-                foreach (View item in Children)
+                if (this.Children == null)
                 {
+                    return;
+                }
+                foreach (View item in Children)
+                { 
                     item.Layout(new Rectangle(0, 0, width, height));
                 }
             }

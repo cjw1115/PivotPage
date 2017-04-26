@@ -30,6 +30,7 @@ namespace PivotView.Droid
         {
             base.OnElementChanged(e);
             _viewPanel = this.Element;
+            _viewPanel.PropertyChanged += _viewPanel_PropertyChanged;
             if (this.Control == null)
             {
                 var viewpager = new ViewPager(this.Context);
@@ -40,6 +41,19 @@ namespace PivotView.Droid
                 _viewPanel.Select = Select;
             }
         }
+
+        private void _viewPanel_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            if(e.PropertyName== ViewPanel.ChildrenProperty.PropertyName)
+            {
+                var viewpager = new ViewPager(this.Context);
+                viewpager.Adapter = new CustomPagerAdapter(this.Context, this.Element);
+                viewpager.PageSelected += Viewpager_PageSelected;
+                this.SetNativeControl(viewpager);
+                _viewPager = viewpager;
+            }
+        }
+
         /// <summary>
         /// 根据索引设置ViewPager中显示项
         /// </summary>

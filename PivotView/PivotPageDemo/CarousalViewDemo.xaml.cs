@@ -45,7 +45,6 @@ namespace PivotPageDemo
         public CarousalViewModel()
         {
             Items = new List<CarousalItem>();
-           
         }
         public void LoadData()
         {

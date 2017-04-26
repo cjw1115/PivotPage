@@ -41,6 +41,7 @@
     <Compile Include="CarousalViewDemo.xaml.cs">
       <DependentUpon>CarousalViewDemo.xaml</DependentUpon>
     </Compile>
+    <Compile Include="CustomImage.cs" />
     <Compile Include="DemoTabbedPage.xaml.cs">
       <DependentUpon>DemoTabbedPage.xaml</DependentUpon>
     </Compile>

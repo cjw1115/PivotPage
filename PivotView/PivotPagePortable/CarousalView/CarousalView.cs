@@ -14,7 +14,7 @@ namespace PivotPagePortable
     {
         public CarousalView()
         {
-            //InnerPlay();
+            InnerPlay();
             this.SelectChanged += CarousalView_SelectChanged;
         }
 
