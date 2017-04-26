@@ -9,7 +9,7 @@ namespace PivotPageDemo
 {
     public class CustomImage:Image
     {
-        double ratio=520/155;
+        double ratio=520d/155d;
         protected override SizeRequest OnMeasure(double widthConstraint, double heightConstraint)
         {
             return new SizeRequest(new Size(widthConstraint, widthConstraint/ratio));

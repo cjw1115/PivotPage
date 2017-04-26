@@ -60,13 +60,15 @@ namespace PivotPagePortable
         {
             if(Device.OS== TargetPlatform.iOS)
             {
-                return base.Measure(widthConstraint, heightConstraint);
+                MeasureWidth = widthConstraint;
+                return _horizentalLayout.Measure(widthConstraint, heightConstraint);
             }
             else
             {
                 double maxHeight = 0;
                 if (this.Children != null)
                 {
+                    
                     foreach (View item in Children)
                     {
                         var size = item.Measure(widthConstraint, heightConstraint);
@@ -85,7 +87,6 @@ namespace PivotPagePortable
             MeasureWidth = width;
             if(Device.OS== TargetPlatform.iOS)
             {
-
                 base.LayoutChildren(x, y, width, height);
             }
 
