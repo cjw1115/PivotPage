@@ -127,11 +127,5 @@ namespace PivotPagePortable
         public delegate void SelectDelegate(int index, bool animate);
 
         public SelectDelegate Select { get; set; }
-
-        public event EventHandler Click;
-        public void OnClick()
-        {
-            Click?.Invoke(this,null);
-        }
     }
 }

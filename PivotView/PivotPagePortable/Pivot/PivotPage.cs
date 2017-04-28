@@ -15,7 +15,7 @@ namespace PivotPagePortable
     /// 安卓:利用ViewPager实现
     /// iOS:利用Forms直接实现，中途用到了iOS中UISCrollView的PagedEnable效果
     /// </summary>
-    public class PivotPage:ContentPage
+    public class PivotPage : ContentPage
     {
         private Grid _grid;
         private ItemsControl _headerList;
@@ -30,9 +30,9 @@ namespace PivotPagePortable
             _headerList = new ItemsControl();
             _headerList.SetValue(Grid.RowProperty, 0);
 
-            _viewPanel = new ViewPanel() { Orientation= ScrollOrientation.Horizontal};
+            _viewPanel = new ViewPanel() { Orientation = ScrollOrientation.Horizontal };
             _viewPanel.SetValue(Grid.RowProperty, 2);
-            
+
             _grid.Children.Add(_headerList);
             _grid.Children.Add(_viewPanel);
 
@@ -49,16 +49,26 @@ namespace PivotPagePortable
         private void _viewPanel_SelectChanged(object sender, SelectedPositionChangedEventArgs e)
         {
             var index = (int)e.SelectedPosition;
-            _headerList.SelectedIndex = index;
+
+            if (_headerList.SelectedIndex != index)
+            {
+                _headerList.SelectedIndex = index;
+            }
         }
 
         private void headerList_ItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
-            ScrollTo(_headerList.SelectedIndex, true);
+            if (_headerList.SelectedIndex != _viewPanel.CurrentIndex)
+            {
+                _viewPanel.CurrentIndex = _headerList.SelectedIndex;
+                ScrollTo(_viewPanel.CurrentIndex, false);
+            }
+
         }
-        public void ScrollTo(int index,bool animation)
+        public void ScrollTo(int index, bool animation)
         {
-            _viewPanel.Select?.Invoke(index,animation);
+            _viewPanel.Select?.Invoke(index, animation);
+
         }
 
         /// <summary>
@@ -113,13 +123,5 @@ namespace PivotPagePortable
             var pivot = sender as PivotPage;
             pivot._viewPanel.Children = (IList)newValue;
         }
-        //protected override void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        //{
-        //    base.OnPropertyChanged(propertyName);
-        //    if (propertyName == nameof(NornamlDataTemplate))
-        //    {
-        //        this._headerList.ItemsSource = this.Headers;
-        //    }
-        //}
     }
 }

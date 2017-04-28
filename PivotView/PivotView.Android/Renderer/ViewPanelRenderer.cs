@@ -22,7 +22,7 @@ using PivotPagePortable;
 [assembly: ExportRenderer(typeof(ViewPanel), typeof(ViewPanelRenderer))]
 namespace PivotView.Droid
 {
-    public class ViewPanelRenderer:ViewRenderer<ViewPanel, ViewPager>
+    public class ViewPanelRenderer : ViewRenderer<ViewPanel, ViewPager>
     {
         private ViewPanel _viewPanel;
         private ViewPager _viewPager;
@@ -44,26 +44,29 @@ namespace PivotView.Droid
 
         private void _viewPanel_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
-            if(e.PropertyName== ViewPanel.ChildrenProperty.PropertyName)
+            if (e.PropertyName == ViewPanel.ChildrenProperty.PropertyName)
             {
                 var viewpager = new ViewPager(this.Context);
                 viewpager.Adapter = new CustomPagerAdapter(this.Context, this.Element);
                 viewpager.PageSelected += Viewpager_PageSelected;
                 this.SetNativeControl(viewpager);
                 _viewPager = viewpager;
+                
             }
         }
 
+      
+
         /// <summary>
-        /// ¸ù¾İË÷ÒıÉèÖÃViewPagerÖĞÏÔÊ¾Ïî
+        /// æ ¹æ®ç´¢å¼•è®¾ç½®ViewPagerä¸­æ˜¾ç¤ºé¡¹
         /// </summary>
-        /// <param name="index">Ë÷Òı£¬´Ó0¿ªÊ¼</param>
+        /// <param name="index">ç´¢å¼•ï¼Œä»0å¼€å§‹</param>
         public void Select(int index, bool animate = true)
         {
             _viewPager.SetCurrentItem(index, animate);
         }
         /// <summary>
-        /// ViewPagerÖĞÏÔÊ¾µÄÊÓÍ¼·¢Éú±ä»¯ºó£¬Í¨ÖªViewPannel
+        /// ViewPagerä¸­æ˜¾ç¤ºçš„è§†å›¾å‘ç”Ÿå˜åŒ–åï¼Œé€šçŸ¥ViewPannel
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -77,7 +80,7 @@ namespace PivotView.Droid
     }
 
     /// <summary>
-    /// ViewPager¶ÔÓ¦µÄAdapter
+    /// ViewPagerå¯¹åº”çš„Adapter
     /// </summary>
     public class CustomPagerAdapter : PagerAdapter
     {
@@ -87,7 +90,7 @@ namespace PivotView.Droid
         public CustomPagerAdapter(Context context, ViewPanel customViewPage)
         {
             _customViewPage = customViewPage;
-            _views = customViewPage.Children ;
+            _views = customViewPage.Children;
             _context = context;
         }
         public override int Count
@@ -100,7 +103,6 @@ namespace PivotView.Droid
                     return 0;
             }
         }
-
         public override Java.Lang.Object InstantiateItem(Android.Views.View container, int position)
         {
             var viewPager = container.JavaCast<ViewPager>();
@@ -114,6 +116,8 @@ namespace PivotView.Droid
             return viewGroup;
         }
 
+       
+
         public override bool IsViewFromObject(Android.Views.View view, Java.Lang.Object objectValue)
         {
             return view == objectValue;
@@ -121,8 +125,10 @@ namespace PivotView.Droid
         public override void DestroyItem(Android.Views.View container, int position, Java.Lang.Object view)
         {
             var viewPager = container.JavaCast<ViewPager>();
-            viewPager.RemoveView(view as Android.Views.View);
+            var item = view as Android.Views.View;
+            
+            viewPager.RemoveView(item);
         }
-        
+
     }
 }
