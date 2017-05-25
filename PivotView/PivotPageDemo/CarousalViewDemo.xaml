@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="PivotPageDemo.CarousalViewDemo"
+             x:Class="PivotPageDemo.CarouselViewDemo"
              xmlns:protable="clr-namespace:PivotPagePortable;assembly=PivotPagePortable"
              xmlns:local="clr-namespace:PivotPageDemo">
     <Grid BackgroundColor="Blue">
@@ -15,8 +15,8 @@
                 <DataTemplate>
                     <local:CustomImage Source="{Binding Img}" Aspect="AspectFit" BackgroundColor="Red"/>
                 </DataTemplate>
-            </protable:CarousalView.ItemTemplate>
-        </protable:CarousalView>
+            </protable:CarouselView.ItemTemplate>
+        </protable:CarouselView>
         <Button BackgroundColor="Black" Grid.Row="1" Text="我是按钮" Clicked="Button_Clicked"></Button>
     </Grid>
 </ContentPage>

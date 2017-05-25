@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<ArrayOfArrayOfArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <ArrayOfArrayOfString>
+    <ArrayOfString>
+      <string>記錄 - origin/master</string>
+    </ArrayOfString>
+    <ArrayOfString>
+      <string>C:\Users\JingShun\Source\Repos\PivotPage\PivotView\PivotPageDemo\DemoTabbedPage.xaml.cs</string>
+    </ArrayOfString>
+    <ArrayOfString>
+      <string>C:\Users\JingShun\Source\Repos\PivotPage\PivotView\PivotPageDemo\PivotXamlPage.xaml.cs</string>
+    </ArrayOfString>
+  </ArrayOfArrayOfString>
+</ArrayOfArrayOfArrayOfString>

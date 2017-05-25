@@ -15,10 +15,10 @@ namespace PivotPagePortable
         public CarouselView()
         {
             InnerPlay();
-            this.SelectChanged += CarousalView_SelectChanged;
+            this.SelectChanged += CarouselView_SelectChanged;
         }
 
-        private void CarousalView_SelectChanged(object sender, SelectedPositionChangedEventArgs e)
+        private void CarouselView_SelectChanged(object sender, SelectedPositionChangedEventArgs e)
         {
             if (realIndex == this.CurrentIndex)
                 return;
