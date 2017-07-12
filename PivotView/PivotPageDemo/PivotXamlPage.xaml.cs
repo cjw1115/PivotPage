@@ -12,7 +12,7 @@ using Xamarin.Forms.Xaml;
 namespace PivotPageDemo
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class PivotXamlPage : PivotPage
+    public partial class PivotXamlPage : PivotPagePortable.PivotPage
     {
         public PivotXamlPage()
         {
