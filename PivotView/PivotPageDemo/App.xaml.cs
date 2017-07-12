@@ -13,7 +13,7 @@ namespace PivotPageDemo
         {
             InitializeComponent();
 
-            MainPage = new PivotXamlPage();
+            MainPage = new CarousalViewDemo();
         }
 
         protected override void OnStart()

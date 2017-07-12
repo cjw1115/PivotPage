@@ -27,14 +27,14 @@ namespace PivotPageDemo
             VM.LoadData();
         }
     }
-    public class CarousalItem
+    public class CarouselItem
     {
         public string Img { get; set; }
     }
     public class CarousalViewModel:INotifyPropertyChanged
     {
-        private List<CarousalItem> _items;
-        public List<CarousalItem> Items
+        private List<CarouselItem> _items;
+        public List<CarouselItem> Items
         {
             get { return _items; }
             set { _items = value;PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Items")); }
@@ -48,13 +48,13 @@ namespace PivotPageDemo
         }
         public void LoadData()
         {
-            List<CarousalItem> imgs = new List<CarouselItem>()
+            List<CarouselItem> imgs = new List<CarouselItem>()
         {
-            new CarousalItem{ Img="banner1.png" },
+            new CarouselItem{ Img="banner1.png" },
 
-            new CarousalItem{ Img="banner2.png" },
+            new CarouselItem{ Img="banner2.png" },
 
-            new CarousalItem{ Img="banner3.png" },
+            new CarouselItem{ Img="banner3.png" },
         };
             Items = imgs;
         }

@@ -107,13 +107,15 @@ namespace PivotView.Droid
         {
             var viewPager = container.JavaCast<ViewPager>();
             var view = _views[position] as Xamarin.Forms.View;
-            view.Parent = _customViewPage;
-            if (Platform.GetRenderer(view) == null)
-                Platform.SetRenderer(view, Platform.CreateRenderer(view));
-            var renderer = Platform.GetRenderer(view);
+            view.Parent = _customViewPage;//必须设置view的parent，否则CreateRenderer会出错
+            //if (Platform.GetRenderer(view) == null)
+            //    Platform.SetRenderer(view, Platform.CreateRenderer(view));
+            //var renderer = Platform.GetRenderer(view);
+            var renderer = Platform.CreateRenderer(view);
             var viewGroup = renderer.ViewGroup;
             viewPager.AddView(viewGroup);
             return viewGroup;
+            
         }
 
        

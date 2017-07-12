@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:PivotPageDemo">
     <Grid BackgroundColor="Blue">
         <Grid.RowDefinitions>
-            <RowDefinition Height="auto" />
+            <RowDefinition  />
             <RowDefinition/>
         </Grid.RowDefinitions>
         <protable:CarouselView x:Name="cv" Grid.Row="0" ItemsSource="{Binding Items,Mode=OneWay}"
@@ -15,8 +15,8 @@
                 <DataTemplate>
                     <local:CustomImage Source="{Binding Img}" Aspect="AspectFit" BackgroundColor="Red"/>
                 </DataTemplate>
-            </protable:CarousalView.ItemTemplate>
-        </protable:CarousalView>
+            </protable:CarouselView.ItemTemplate>
+        </protable:CarouselView>
         <Button BackgroundColor="Black" Grid.Row="1" Text="我是按钮" Clicked="Button_Clicked"></Button>
     </Grid>
 </ContentPage>

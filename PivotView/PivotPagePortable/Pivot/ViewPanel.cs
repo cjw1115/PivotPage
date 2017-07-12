@@ -66,18 +66,19 @@ namespace PivotPagePortable
             }
             else
             {
-                double maxHeight = 0;
-                if (this.Children != null)
-                {
+                //double maxHeight = 0;
+                //if (this.Children != null)
+                //{
 
-                    foreach (View item in Children)
-                    {
-                        var size = item.Measure(widthConstraint, heightConstraint);
-                        if (size.Request.Height > maxHeight)
-                            maxHeight = size.Request.Height;
-                    }
-                }
-                return new SizeRequest(new Size(widthConstraint, maxHeight));
+                //    foreach (View item in Children)
+                //    {
+                //        var size = item.Measure(widthConstraint, heightConstraint);
+                //        if (size.Request.Height > maxHeight)
+                //            maxHeight = size.Request.Height;
+                //    }
+                //}
+                //return new SizeRequest(new Size(widthConstraint, maxHeight));
+                return new SizeRequest(new Size(385, 100));
             }
 
         }
@@ -99,7 +100,7 @@ namespace PivotPagePortable
                 }
                 foreach (View item in Children)
                 {
-                    item.Layout(new Rectangle(0, 0, width, height));
+                    item.Layout(new Rectangle(0, 0, 100, 50));
                 }
             }
         }
